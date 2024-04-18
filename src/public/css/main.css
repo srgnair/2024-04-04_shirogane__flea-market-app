@@ -1,0 +1,57 @@
+main {
+margin: 0;
+}
+
+.main__menu ul {
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+padding-inline-start: 0px;
+}
+
+.main__menu {
+width: 100vw;
+margin-bottom: 40px;
+border-bottom: 3px #5F5F5F solid;
+}
+
+.main__menu ul {
+display: flex;
+list-style: none;
+font-size: 18px;
+font-weight: bold;
+margin: 0 0 5px 100px;
+padding: 0;
+}
+
+.main__menu li {
+cursor: pointer;
+}
+
+.main__menu li:last-child {
+margin-left: 60px;
+}
+
+.main__menu--mylist-search{
+    color: #ff0000;
+}
+
+.main__content {
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 50px;
+}
+
+.main__content--card {
+    text-align: left;
+    width: 23%;
+    margin: 15px;
+    border-radius: 3px;
+}
+
+.main__content--card img{
+    width: 100%;
+}

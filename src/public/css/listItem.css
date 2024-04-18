@@ -1,0 +1,97 @@
+.list-item {
+width: 500px;
+margin: 0 auto;
+}
+
+.list-item__title {
+font-size: 24px;
+font-weight: bolder;
+margin-bottom: 20px;
+}
+
+/* .list-item__form {
+margin-bottom: 20px;
+} */
+
+.list-item__form--img {
+display: flex;
+margin-bottom: 40px;
+}
+
+.form__img--select-button {
+margin-left: 40px;
+}
+
+.form__img--select-button button {
+border: 3px solid #ff5555;
+outline: none;
+margin: 0 auto;
+padding: 3px 20px 3px;
+background: white;
+display: inline-block;
+color: #ff5555;
+font-size: 14px;
+font-weight: bold;
+border-radius: 5px;
+letter-spacing: 1px;
+cursor: pointer;
+}
+
+.form__title {
+text-align: left;
+border-bottom: #5F5F5F 3px solid;
+margin: 50px 0 20px;
+font-weight: bold;
+color: black;
+font-size: 20px;
+}
+
+.form__item {
+margin-bottom: 20px;
+}
+
+.form__item--border {
+border: #5F5F5F solid 3px;
+padding: 50px;
+}
+
+.form__item label {
+display: block;
+text-align: left;
+font-weight: bold;
+}
+
+.form__item input,
+.form__item textarea {
+width: 100%;
+font-size: 18px;
+padding: 10px;
+border: #5F5F5F solid 3px;
+}
+
+.form__submit {
+margin-bottom: 100px;
+}
+
+.form__submit button {
+width: 100%;
+border: none;
+outline: none;
+margin-top: 40px;
+padding: 10px;
+background: #D49D9D;
+display: inline-block;
+color: #fff;
+font-size: 18px;
+font-weight: bold;
+border-radius: 3px;
+letter-spacing: 1px;
+cursor: pointer;
+}
+
+.form__switch {
+color: #0073cc;
+margin-top: 20px;
+cursor: pointer;
+font-weight: bold;
+}

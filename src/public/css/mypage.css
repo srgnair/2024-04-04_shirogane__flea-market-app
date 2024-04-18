@@ -1,0 +1,98 @@
+main {
+width: 1250px;
+}
+
+.mypage__user-info {
+display: flex;
+justify-content: center;
+margin-bottom: 40px;
+}
+
+.mypage__user-info--img {
+margin-left: 10px;
+width: 5%;
+}
+
+.mypage__user-info--img img{
+    width: 100%;
+    border-radius: 100px;
+}
+
+.mypage__user-info--user-name {
+font-weight: bold;
+font-size: 18px;
+text-align: center;
+/* line-height: 36px; */
+margin: 0 200px 0 20px;
+}
+
+.mypage__user-info--profile-change-btn {
+margin: auto 0;
+}
+
+.mypage__user-info--profile-change-btn button {
+border: 3px solid #ff5555;
+outline: none;
+margin: 0;
+padding: 3px 20px 3px;
+background: white;
+display: inline-block;
+color: #ff5555;
+font-size: 14px;
+font-weight: bold;
+border-radius: 5px;
+letter-spacing: 1px;
+cursor: pointer;
+text-align: center;
+}
+
+.mypage__menu ul {
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+padding-inline-start: 0px;
+}
+
+.mypage__menu {
+width: 100%;
+margin-bottom: 40px;
+border-bottom: 3px #5F5F5F solid;
+}
+
+.mypage__menu ul {
+display: flex;
+list-style: none;
+font-size: 18px;
+font-weight: bold;
+margin: 0 0 5px 100px;
+padding: 0;
+}
+
+.mypage__menu li {
+cursor: pointer;
+}
+
+.mypage__menu li:last-child {
+margin-left: 60px;
+}
+
+.mypage__content {
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 50px;
+}
+
+.mypage__content--card {
+    text-align: left;
+    width: 23%;
+    margin: 10px;
+    border-radius: 3px;
+}
+
+/* .mypage__content--card img{
+    width: 100%;
+} */
+
