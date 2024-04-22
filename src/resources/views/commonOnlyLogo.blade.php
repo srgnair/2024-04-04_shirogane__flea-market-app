@@ -14,9 +14,9 @@
     <div class="wrapper">
 
         <header>
-            <div class="header_logo">
+            <div class="header__logo">
                 <div class="img">
-                    <img src="img/coachtechLogo.png">
+                    <img src="{{ asset('img/coachtechLogo.png') }}">
                 </div>
             </div>
         </header>

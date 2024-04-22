@@ -193,7 +193,7 @@ class TestController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            return redirect()->route('login')->with('error', 'ログインしてください');
+            return redirect()->route('loginView')->with('error', 'ログインしてください');
         }
 
         $likeItems = $user->likes()->with('item')->get();
