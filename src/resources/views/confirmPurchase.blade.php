@@ -47,7 +47,9 @@
             </div>
         </div>
         <div class="shipping-container__shipping-address--change-btn">
-            変更する
+            <a href="{{ route('shippingChangeView', ['item_id' => $item->id]) }}">
+                変更する
+            </a>
         </div>
     </div>
 </div>

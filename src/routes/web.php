@@ -3,6 +3,16 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\MyPageController;
+use App\Http\Controllers\MainPageController;
+use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\DetailPageController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileChangeController;
 
 // Route::get('/', function () {
 // return view('welcome');
@@ -23,39 +33,37 @@ require __DIR__ . '/auth.php';
 Route::middleware('web')->group(
     function () {
 
-        Route::get('/register', [TestController::class, 'registerView'])->name('registerView');
-        Route::post('/register', [TestController::class, 'register'])->name('register');
+        Route::get('/register', [RegisterController::class, 'registerView'])->name('registerView');
+        Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-        Route::get('/login', [TestController::class, 'loginView'])->name('loginView');
-        Route::post('/logout', [TestController::class, 'logout'])->name('logout');
+        Route::get('/Glogin', [LoginController::class, 'loginView'])->name('loginView');
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-        Route::get('/detail/comment/{item_id}', [TestController::class, 'commentView'])->name('commentView');
+        Route::get('/', [MainPageController::class, 'mainView'])->name('mainView');
 
-        // Route::post('/detail/comment/{item_id}', [TestController::class, 'commentView'])->name('commentView');
+        Route::get('/detail/{id}', [DetailPageController::class, 'detailView'])->name('detailView');
 
-        Route::post('/detail/comment/submit/{item_id}', [TestController::class, 'comment'])->name('comment');
+        // 以下要認証
 
-        // Route::delete('/detail/comment/delete/{comment_id}', [TestController::class, 'commentDelete'])->name('commentDelete');
+        Route::get('/detail/comment/{item_id}', [CommentController::class, 'commentView'])->name('commentView');
+        Route::post('/detail/comment/submit/{item_id}', [CommentController::class, 'comment'])->name('comment');
+        Route::delete('/detail/comment/delete/{comment_id}/{item_id}', [CommentController::class, 'commentDelete'])->name('commentDelete');
 
-        Route::delete('/detail/comment/delete/{comment_id}/{item_id}', [TestController::class, 'commentDelete'])->name('commentDelete');
+        Route::get('/confirm_purchase/{item_id}', [PurchaseController::class, 'confirmPurchaseView'])->name('confirmPurchaseView');
 
-        Route::get('/confirm_purchase/{item_id}', [TestController::class, 'confirmPurchaseView'])->name('confirmPurchaseView');
+        Route::get('/shipping_change', [TestController::class, 'shippingChangeView'])->name('shippingChangeView');
 
-        Route::get('/mypage', [TestController::class, 'mypageView'])->name('mypageView');
-        Route::get('/mypage/purchased_item', [TestController::class, 'mypagePurchasedItemsView'])->name('mypagePurchasedItemsView');
+        Route::get('/mypage', [MyPageController::class, 'mypageView'])->name('mypageView');
+        Route::get('/mypage/purchased_item', [MyPageController::class, 'mypagePurchasedItemsView'])->name('mypagePurchasedItemsView');
 
-        Route::get('/', [TestController::class, 'mainView'])->name('mainView');
+        Route::get('/my_items', [MainPageController::class, 'mainMyDisplayItemsView'])->name('mainMyDisplayItemsView');
 
-        Route::get('/my_items', [TestController::class, 'mainMyDisplayItemsView'])->name('mainMyDisplayItemsView');
+        Route::get('/display_item', [DisplayController::class, 'displayItemView'])->name('displayItemView');
+        Route::post('/display_item', [DisplayController::class, 'displayItem'])->name('displayItem');
 
-        Route::get('/display_item', [TestController::class, 'displayItemView'])->name('displayItemView');
-        Route::post('/display_item', [TestController::class, 'displayItem'])->name('displayItem');
+        Route::post('/{item_id}', [LikeController::class, 'like'])->name('like');
+        Route::delete('/{item_id}', [LikeController::class, 'deleteLike'])->name('deleteLike');
 
-        Route::get('/detail/{id}', [TestController::class, 'detailView'])->name('detailView');
-
-        Route::post('/{item_id}', [TestController::class, 'like'])->name('like');
-        Route::delete('/{item_id}', [TestController::class, 'deleteLike'])->name('deleteLike');
-
-        Route::get('/mypage/profile_change', [TestController::class, 'profileChangeView'])->name('profileChangeView');
+        Route::get('/mypage/profile_change', [ProfileChangeController::class, 'profileChangeView'])->name('profileChangeView');
     }
 );
