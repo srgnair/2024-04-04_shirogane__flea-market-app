@@ -13,6 +13,7 @@ use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\DetailPageController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileChangeController;
+use App\Http\Controllers\PaymentController;
 
 // Route::get('/', function () {
 // return view('welcome');
@@ -65,5 +66,10 @@ Route::middleware('web')->group(
         Route::delete('/{item_id}', [LikeController::class, 'deleteLike'])->name('deleteLike');
 
         Route::get('/mypage/profile_change', [ProfileChangeController::class, 'profileChangeView'])->name('profileChangeView');
+
+        Route::prefix('payment')->name('payment.')->group(function () {
+            Route::get('/create', [PaymentController::class, 'create'])->name('create');
+            Route::post('/store', [PaymentController::class, 'store'])->name('store');
+        });
     }
 );

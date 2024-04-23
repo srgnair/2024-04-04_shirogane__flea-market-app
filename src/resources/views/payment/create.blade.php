@@ -1,10 +1,9 @@
-@extends('commonWithSearchFunction')
+@extends('commonOnlyLogo')
 @section('title')
 <title>決済ページ</title>
 @endsection
 @section('css')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ asset('css/payment.css') }}">
 @endsection
 @section('content')
 
@@ -26,17 +25,17 @@
                     @csrf
                     <div>
                         <label for="card_number">カード番号</label>
-                        <input type="text" class="form-control" id="card_number" name="card_number">
+                        <div id="card-number" class="form-control"></div>
                     </div>
 
                     <div>
                         <label for="card_expiry">有効期限</label>
-                        <input type="text" class="form-control" id="card-expiry" name="card-expiry">
+                        <div id="card-expiry" class="form-control"></div>
                     </div>
 
                     <div>
                         <label for="card-cvc">セキュリティコード</label>
-                        <input type="text" class="form-control" id="card-cvc" name="card-cvc">
+                        <div id="card-cvc" class="form-control"></div>
                     </div>
 
                     <div id="card-errors" class="text-danger"></div>
@@ -52,10 +51,9 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     /* 基本設定*/
-    const stripe_public_key = "{{ config('stripe.pk_key') }}";
+    const stripe_public_key = "{{ config('stripe.stripe_public_key') }}"
     const stripe = Stripe(stripe_public_key);
     const elements = stripe.elements();
-
 
     var cardNumber = elements.create('cardNumber');
     cardNumber.mount('#card-number');
