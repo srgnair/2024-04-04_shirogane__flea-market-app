@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('title')
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/common.css') }}" />
@@ -17,7 +16,7 @@
         <header>
             <div class="header__logo">
                 <div class="img">
-                    <a href="{{ route('mainView') }}"><img src="{{ asset('img/coachtechLogo.png') }}"></a>
+                    <img src="{{ asset('img/coachtechLogo.png') }}">
                 </div>
             </div>
         </header>

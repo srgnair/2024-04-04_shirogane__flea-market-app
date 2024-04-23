@@ -41,12 +41,19 @@
 </div>
 
 <div class="mypage__content">
-    <div class="mypage__content--img">
+    <div class="mypage__content--cards">
+        @foreach($sellersItems as $sellersItem)
+        @foreach($itemImages as $itemImage)
         <div class="mypage__content--card">
-            @foreach($itemImages as $itemImage)
-            <img src="{{ $itemImage->image }}" alt="イメージ画像">
-            @endforeach
+            <a href="{{ route('detailView', ['id' => $sellersItem->id]) }}" class="card__link">
+                <div class="card__image-container">
+                    <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
+                    <img class="card__item-image" src="{{ $itemImage->image }}" alt="イメージ画像">
+                </div>
+            </a>
         </div>
+        @endforeach
+        @endforeach
     </div>
 </div>
 @endsection

@@ -1,5 +1,5 @@
 main {
-width: 1250px;
+width: 100%;
 }
 
 .mypage__user-info {
@@ -9,7 +9,7 @@ margin-bottom: 40px;
 }
 
 .mypage__user-info--img {
-margin-left: 10px;
+margin: auto 0;
 width: 5%;
 }
 
@@ -96,3 +96,61 @@ margin-left: 60px;
     width: 100%;
 } */
 
+
+.mypage__content--cards {
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 50px;
+}
+
+.mypage__content--card {
+    text-align: left;
+    /* width: 15%; */
+    margin: 15px;
+    border-radius: 3px;
+    position: relative;
+    width: 200px; /* カードの幅 */
+    height: 200px; /* カードの高さ */
+}
+
+.mypage__content--card img{
+    width: 100%;
+}
+
+.card__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.card__image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card__background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 画像の切り取り方法を指定 */
+}
+
+.card__item-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%; /* 商品画像の最大幅 */
+    max-height: 80%; /* 商品画像の最大高さ */
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* 画像が切れることなくコンテナー内に収まるように調整 */
+}
