@@ -37,7 +37,7 @@ Route::middleware('web')->group(
         Route::get('/register', [RegisterController::class, 'registerView'])->name('registerView');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-        Route::get('/Glogin', [LoginController::class, 'loginView'])->name('loginView');
+        Route::get('/login', [LoginController::class, 'loginView'])->name('loginView');
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
         Route::get('/', [MainPageController::class, 'mainView'])->name('mainView');
@@ -52,7 +52,8 @@ Route::middleware('web')->group(
 
         Route::get('/confirm_purchase/{item_id}', [PurchaseController::class, 'confirmPurchaseView'])->name('confirmPurchaseView');
 
-        Route::get('/shipping_change', [TestController::class, 'shippingChangeView'])->name('shippingChangeView');
+        Route::get('/shipping_change/{item_id}', [TestController::class, 'shippingChangeView'])->name('shippingChangeView');
+        Route::post('/shipping_change/{item_id}', [TestController::class, 'shippingChange'])->name('shippingChange');
 
         Route::get('/mypage', [MyPageController::class, 'mypageView'])->name('mypageView');
         Route::get('/mypage/purchased_item', [MyPageController::class, 'mypagePurchasedItemsView'])->name('mypagePurchasedItemsView');

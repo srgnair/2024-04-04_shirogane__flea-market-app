@@ -1,6 +1,7 @@
 main{
-    width: 90vw;
+    width:100%;
     margin: 0;
+    padding: 5%;
 }
 
 .detail {
