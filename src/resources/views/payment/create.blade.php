@@ -16,32 +16,29 @@
     </div>
     @endif
     <div class="p-5">
-        <div class="payment">
-            <div class="payment__title">
-                決済
-            </div>
-            <div class="payment__content">
+        <div class="col-6 card">
+            <div class="card-header">Stripe決済</div>
+            <div class="card-body">
                 <form id="card-form" action="{{ route('payment.store') }}" method="POST">
                     @csrf
                     <div>
-                        <label for="card_number">カード番号</label>
-                        <div id="card-number" class="form-control"></div>
+                        <label for="card-number">カード番号</label>
+                        <input type="text" id="card-number" class="form-control">
                     </div>
 
                     <div>
-                        <label for="card_expiry">有効期限</label>
-                        <div id="card-expiry" class="form-control"></div>
+                        <label for="card-expiry">有効期限</label>
+                        <input type="text" id="card-expiry" class="form-control">
                     </div>
 
                     <div>
                         <label for="card-cvc">セキュリティコード</label>
-                        <div id="card-cvc" class="form-control"></div>
+                        <input type="text" id="card-cvc" class="form-control">
                     </div>
 
                     <div id="card-errors" class="text-danger"></div>
 
                     <button class="mt-3 btn btn-primary">支払い</button>
-
                 </form>
             </div>
         </div>
@@ -51,7 +48,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     /* 基本設定*/
-    const stripe_public_key = "{{ config('stripe.stripe_public_key') }}"
+    const stripe_public_key = "{{ env('STRIPE_KEY') }}";
     const stripe = Stripe(stripe_public_key);
     const elements = stripe.elements();
 
@@ -117,5 +114,4 @@
         form.submit();
     }
 </script>
-
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Exception;
+use Stripe\Stripe;
+use Stripe\Charge;
 
 class PaymentController extends Controller
 {
@@ -20,10 +22,10 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        \Stripe\Stripe::setApiKey(config('stripe.stripe_secret_key'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
-            \Stripe\Charge::create([
+            Charge::create([
                 'source' => $request->stripeToken,
                 'amount' => 1000,
                 'currency' => 'jpy',
