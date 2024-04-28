@@ -67,6 +67,7 @@ Route::middleware('web')->group(
         Route::delete('/{item_id}', [LikeController::class, 'deleteLike'])->name('deleteLike');
 
         Route::get('/mypage/profile_change', [ProfileChangeController::class, 'profileChangeView'])->name('profileChangeView');
+        Route::post('/mypage/profile_change', [ProfileChangeController::class, 'profileChange'])->name('profileChange');
 
         Route::prefix('payment')->name('payment.')->group(function () {
             Route::get('/create', [PaymentController::class, 'create'])->name('create');
