@@ -55,6 +55,12 @@
                     <p>{{$errors->first('category')}}</p>
                     @enderror
                     <input type="text" name="category" value="{{ old('category') }}" />
+                    <!-- <select id="selectArea" name="area" class="form__item--control">
+                        <option value="">area</option>
+                        <option value="1">東京都</option>
+                        <option value="2">大阪府</option>
+                        <option value="3">福岡県</option>
+                    </select> -->
                 </div>
                 <div class="form__item">
                     <label for="condition">商品の状態</label>

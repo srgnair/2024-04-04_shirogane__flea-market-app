@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('seller_id')->unsigned();
-            $table->bigInteger('buyer_id')->unsigned();
+            $table->bigInteger('buyer_id')->unsigned()->nullable();
             $table->bigInteger('item_id')->unsigned();
             $table->string('transaction_type');
             $table->timestamps();

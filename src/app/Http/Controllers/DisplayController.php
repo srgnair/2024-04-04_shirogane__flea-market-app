@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\ItemImage;
 use App\Models\ItemCategory;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -19,6 +20,7 @@ class DisplayController extends Controller
     public function displayItem(Request $request)
     {
         //item、itemCategory、itemImageはテーブルが別
+        //transactionテーブルをcreateする
 
         // リクエストの内容をログに出力
         Log::info($request->all());
@@ -50,8 +52,14 @@ class DisplayController extends Controller
         $newItemImage->item_id = $item_id;
         $newItemImage->save();
 
+        $newItemTransaction = new Transaction();
+        $newItemTransaction->seller_id = $user_id;
+        $newItemTransaction->buyer_id = $user_id;
+        $newItemTransaction->item_id = $item_id;
+        $newItemTransaction->transaction_type = 'listed';
+        $newItemTransaction->save();
+
         // データベースに新しいアイテムを作成
         return redirect()->route('displayItem')->with('message', '登録されました！');
     }
-
 }

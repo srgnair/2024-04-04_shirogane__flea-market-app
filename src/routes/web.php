@@ -55,6 +55,7 @@ Route::middleware('web')->group(
         Route::delete('/detail/comment/delete/{comment_id}/{item_id}', [CommentController::class, 'commentDelete'])->name('commentDelete');
 
         Route::get('/confirm_purchase/{item_id}', [PurchaseController::class, 'confirmPurchaseView'])->name('confirmPurchaseView');
+        Route::post('/purchase/{item_id}', [PurchaseController::class, 'Purchase'])->name('purchase');
 
         Route::get('/shipping_change/{item_id}', [TestController::class, 'shippingChangeView'])->name('shippingChangeView');
         Route::post('/shipping_change/{item_id}', [TestController::class, 'shippingChange'])->name('shippingChange');

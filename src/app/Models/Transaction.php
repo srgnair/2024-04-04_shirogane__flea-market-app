@@ -24,4 +24,16 @@ class Transaction extends Model
         'item_id',
         'transaction_type',
     ];
+
+    public function getTransactionStatusAttribute($value)
+    {
+        $status = [
+            'listed' => '出品中',
+            'sold' => '販売済み',
+            'purchased' => '購入済み'
+        ];
+
+        return $status[$value] ?? $value;
+    }
+
 }
