@@ -29,6 +29,6 @@ class RegisterController extends Controller
 
         //$user->sendEmailVerificationNotification();
 
-        return redirect()->route('loginView');
+        return redirect()->route('loginView')->with('message', '登録されました！');
     }
 }

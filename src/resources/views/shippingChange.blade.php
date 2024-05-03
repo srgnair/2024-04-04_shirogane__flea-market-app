@@ -14,8 +14,8 @@
         </div>
         <div class="shipping-change-form">
             <div class="form__item">
-                <label for="post-code">郵便番号</label>
-                <input type="text" name="post-code" value="{{ old('post-code') }}" />
+                <label for="post_code">郵便番号</label>
+                <input type="text" name="post_code" value="{{ old('post_code') }}" />
             </div>
             <div class="form__item">
                 <label for="address">住所</label>
@@ -23,7 +23,7 @@
             </div>
             <div class="form__item">
                 <label for="building_name">建物名</label>
-                <input type="text" name="building_name" value="{{ old('building-name') }}" />
+                <input type="text" name="building_name" value="{{ old('building_name') }}" />
             </div>
         </div>
         <div class="form__submit">

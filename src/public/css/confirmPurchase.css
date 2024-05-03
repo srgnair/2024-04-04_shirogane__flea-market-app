@@ -1,5 +1,7 @@
 main{
+    margin: 0;
     width: 100%;
+    padding: 60px 40px;
 }
 
 .confirm-purchase__container{
@@ -79,7 +81,44 @@ letter-spacing: 1px;
 cursor: pointer;
 }
 
-.container__item-img{
-    margin: 0 auto;
-width: 50%;;
+.container__item--wrapper{
+    text-align: left;
+    margin: 30px;
+}
+
+.comment__img {
+    border-radius: 3px;
+    position: relative;
+    width: 100px; /* カードの幅 */
+    height: 100px; /* カードの高さ */
+    margin: 0px 0 30px 20px;
+}
+
+.card__image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card__background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.card__item-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%; /* 商品画像の最大幅 */
+    max-height: 80%; /* 商品画像の最大高さ */
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
 }

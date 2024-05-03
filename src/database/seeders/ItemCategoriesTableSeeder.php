@@ -30,12 +30,24 @@ class ItemCategoriesTableSeeder extends Seeder
             ],
             [
                 'item_id' => '2',
-                'category' => 'ぬいぐるみ',
+                'category' => '洋服',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'item_id' => '1',
+                'category' => 'レディース',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'item_id' => '3',
+                'category' => 'ぬいぐるみ',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'item_id' => '4',
                 'category' => 'バッグ',
                 'created_at' => now(),
                 'updated_at' => now(),

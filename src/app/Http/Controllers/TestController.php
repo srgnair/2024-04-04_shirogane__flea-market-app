@@ -46,6 +46,28 @@ class TestController extends Controller
         return view('shippingChange', compact('item_id'));
     }
 
+    // public function shippingChange(Request $request, $item_id)
+    // {
+    //     $user_id = Auth::id();
+
+    //     $userData = $request->except('_token');
+    //     $userData['user_id'] = $user_id;
+
+    //     $shippingAddress = DeliveryAddress::findOrFail($user_id);
+    //     $shippingAddress->update($userData);
+
+    //     // 元の商品購入確認ページに戻るためにセッションに商品IDを保存する
+    //     $item_id = session()->get('item_id');
+
+    //     // 商品IDがセッションにない場合は適切な処理を行う（例: エラーを表示する、リダイレクトするなど）
+    //     if (!$item_id) {
+    //         return redirect()->back()->with('error', '元のページが見つかりませんでした。');
+    //     }
+
+    //     // 商品購入確認ページにリダイレクトする際に商品IDを渡す
+    //     return redirect()->route('confirmPurchaseView', ['item_id' => $item_id])->with('message', '登録されました！');
+    // }
+
     public function shippingChange(Request $request, $item_id)
     {
         $user_id = Auth::id();
@@ -53,8 +75,17 @@ class TestController extends Controller
         $userData = $request->except('_token');
         $userData['user_id'] = $user_id;
 
-        $shippingAddress = DeliveryAddress::findOrFail($user_id);
-        $shippingAddress->update($userData);
+
+        // 既存の住所があるかチェック
+        $shippingAddress = DeliveryAddress::where('user_id', $user_id)->first();
+
+        if ($shippingAddress) {
+            // 既存の住所がある場合はアップデート
+            $shippingAddress->update($userData);
+        } else {
+            // 既存の住所がない場合は新規作成
+            DeliveryAddress::create($userData);
+        }
 
         // 元の商品購入確認ページに戻るためにセッションに商品IDを保存する
         $item_id = session()->get('item_id');
@@ -67,6 +98,7 @@ class TestController extends Controller
         // 商品購入確認ページにリダイレクトする際に商品IDを渡す
         return redirect()->route('confirmPurchaseView', ['item_id' => $item_id])->with('message', '登録されました！');
     }
+
 
     public function create()
     {

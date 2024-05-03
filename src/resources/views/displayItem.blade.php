@@ -24,14 +24,26 @@
         <div class="list-item__form">
 
             <div class="form__item">
-                <label for="image">商品画像</label>
+                <!-- <label for="image">商品画像</label> -->
                 @error('image')
                 <p>{{$errors->first('image')}}</p>
                 @enderror
                 <div class="form__item--border">
                     <div class="form__image--select-button">
-                        <input class="form__item--control" type="file" name="image">
-                        <button>画像を選択する</button>
+                        <!-- <input class="form__item--control" type="file" name="image">
+                        <button>画像を選択する</button> -->
+                        <input type="file" id="fileElem" multiple accept="image/*" style="display:none" name="image" />
+                        <button id="fileSelect" type="button">画像を選択する</button>
+                        <script>
+                            const fileSelect = document.getElementById("fileSelect");
+                            const fileElem = document.getElementById("fileElem");
+
+                            fileSelect.addEventListener("click", (e) => {
+                                if (fileElem) {
+                                    fileElem.click();
+                                }
+                            }, false);
+                        </script>
                     </div>
                 </div>
             </div>
@@ -50,7 +62,12 @@
                     <p>{{$errors->first('condition')}}</p>
                     @enderror
                     <input type="text" name="condition" value="{{ old('condition') }}" />
-
+                </div>
+                <div class="form__item">
+                    <label for="condition">商品の状態</label>
+                    @error('brand_name')
+                    <p>{{$errors->first('brand_name')}}</p>
+                    @enderror
                     <input type="text" name="brand_name" value="{{ old('brand_name') }}" />
                 </div>
             </div>

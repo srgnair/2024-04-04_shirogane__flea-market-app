@@ -21,32 +21,29 @@ class ProfileChangeController extends Controller
         return view('profileChange', compact('userProfile'));
     }
 
+
     public function profileChange(Request $request)
     {
-        // ログイン中のユーザーのIDを取得
         $user_id = Auth::id();
 
-        // ユーザーを取得
-        $userProfile = User::find($user_id);
-
-        // フォームから送信されたデータを取得
         $userData = $request->except('_token');
+        $userData['user_id'] = $user_id;
 
-        // パスワードが空の場合は除外する
-        if (empty($userData['password'])) {
-            unset($userData['password']);
-        } else {
-            // パスワードをハッシュ化する
-            $userData['password'] = Hash::make($userData['password']);
+        // アップロードされた画像ファイルを取得
+        if ($request->hasFile('img')) {
+            $img = $request->file('img');
+            // 一意のファイル名を生成
+            $filename = uniqid() . '.' . $img->getClientOriginalExtension();
+            // 画像を public/img ディレクトリに移動
+            $img->move(public_path('img'), $filename);
+            // 画像のパスをデータに追加
+            $userData['img'] = 'img/' . $filename;
         }
 
-        // ユーザーデータを更新
+        // ユーザープロフィールを更新
+        $userProfile = User::findOrFail($user_id);
         $userProfile->update($userData);
 
-        // 更新後のユーザーデータを再取得（更新された情報を表示するため）
-        $userProfile = User::find($user_id);
-
-        // プロフィール変更画面に戻る
         return view('profileChange', compact('userProfile'))->with('message', '登録されました！');
     }
 }

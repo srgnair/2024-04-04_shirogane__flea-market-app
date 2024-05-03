@@ -47,7 +47,7 @@
             @else
             <ul class="header__ul">
                 <li>
-                    <a href="{{ route('registerView') }}">
+                    <a href="{{ route('loginView') }}">
                         <button>
                             ログイン
                         </button>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-       public function like(Request $request)
+    public function like(Request $request)
     {
         $user_id = Auth::id();
         $item_id = $request->input('item_id');

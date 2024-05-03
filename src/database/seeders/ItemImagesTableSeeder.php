@@ -24,13 +24,19 @@ class ItemImagesTableSeeder extends Seeder
             ],
             [
                 'item_id' => '2',
-                'image' => 'img/itemImage.png',
+                'image' => 'img/t-shirt.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'item_id' => '3',
-                'image' => 'img/itemImage.png',
+                'image' => 'img/stuffed-animal.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'item_id' => '4',
+                'image' => 'img/bag.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -15,8 +15,8 @@ class TransactionsTableSeeder extends Seeder
     {
         DB::table('transactions')->insert([
             [
-                'seller_id' => '2',
-                'buyer_id' => '3',
+                'seller_id' => '8',
+                'buyer_id' => '9',
                 'item_id' => '1',
                 'transaction_type' => '購入済み',
                 'created_at' => now(),

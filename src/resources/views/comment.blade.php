@@ -12,7 +12,10 @@
 
     <div class="comment__img">
         @foreach($itemImages as $itemImage)
-        <img src="{{ asset('img/itemImage.png') }}" alt="イメージ画像">
+        <div class="card__image-container">
+            <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
+            <img class="card__item-image" src="{{ asset($itemImage->image) }}" alt="イメージ画像">
+        </div>
         @endforeach
     </div>
 
@@ -39,7 +42,7 @@
                             <button type="submit">
                                 <i class="fa-regular fa-star fa-xl" style="color: #ff5555;"></i>
                             </button>
-                            <div class=" detail__item-info--number">{{ $likes->count() }}
+                            <div class=" comment__item-info--number">{{ $likes->count() }}
                             </div>
                         </form>
                         @else
@@ -49,7 +52,7 @@
                             <button type="submit">
                                 <i class="fa-regular fa-star fa-xl"></i>
                             </button>
-                            <div class=" detail__item-info--number">{{ $likes->count() }}
+                            <div class=" comment__item-info--number">{{ $likes->count() }}
                             </div>
                         </form>
                         @endif
@@ -57,7 +60,7 @@
                 </div>
                 <div class="comment__item-info--icon">
                     <i class="fa-regular fa-comment fa-xl"></i>
-                    <div class=" detail__item-info--number">{{ $comments->count() }}
+                    <div class=" comment__item-info--number">{{ $comments->count() }}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,11 @@
 
     <div class="detail__img">
         @foreach($itemImages as $itemImage)
-        <img src="{{ asset('img/itemImage.png') }}" alt="イメージ画像">
+        <!-- <img src="{{ asset('img/itemImage.png') }}" alt="イメージ画像"> -->
+        <div class="card__image-container">
+            <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
+            <img class="card__item-image" src="{{ asset($itemImage->image) }}" alt="イメージ画像">
+        </div>
         @endforeach
     </div>
 
@@ -33,7 +37,8 @@
             <div class="detail__item-info--icon-wrapper">
                 <div class="detail__item-info--icon">
                     <div class="detail__item-info--star">
-                        @if(Auth::check() && Auth::user()->is_like($item->item_id))
+
+                        @if(Auth::check() && Auth::user()->is_like($item->id))
                         <form action="{{ route('deleteLike', ['item_id' => $item->id] ) }}" method="POST" class="mb-4">
                             @csrf
                             @method('DELETE')
@@ -60,7 +65,7 @@
                 <div class="detail__item-info--icon">
                     <form action="{{ route('commentView', ['item_id' => $item->id])  }}" method="GET" class="mb-4">
                         @csrf
-                        <input type="hidden" name="item_id" value="{{$item->id}}">
+                        <!-- <input type="hidden" name="item_id" value="{{$item->id}}"> -->
                         <button type="submit">
                             <i class="fa-regular fa-comment fa-xl"></i>
                         </button>

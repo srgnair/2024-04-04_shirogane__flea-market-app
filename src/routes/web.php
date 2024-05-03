@@ -34,6 +34,10 @@ require __DIR__ . '/auth.php';
 Route::middleware('web')->group(
     function () {
 
+        Route::get('/test', function () {
+            return 'abc';
+        });
+
         Route::get('/register', [RegisterController::class, 'registerView'])->name('registerView');
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
 

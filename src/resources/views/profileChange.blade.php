@@ -17,20 +17,26 @@
         @endif
         <div class="profile-change__form">
             <div class="profile-change__form--img">
-                <div class="form__img--img">
+                <!-- <div class="form__img--img">
                     @if (Auth::check() && Auth::user()->img !== null)
-                    <img src="{{ asset($userProfile->img) }}" alt="イメージ画像">
+                    <img id="thumbnail" accept="image/*" src="{{ asset($userProfile->img) }}" alt="イメージ画像">
                     @else
-                    <img src="{{ asset('img/sampleUserImage.png') }}" alt="イメージ画像">
+                    <img id="thumbnail" accept="image/*" src="{{ asset('img/sampleUserImage.png') }}" alt="イメージ画像">
                     @endif
+                </div> -->
+                <div class="form__img--img">
+                    <img id="thumbnail" accept="image/*" src="{{ Auth::check() && Auth::user()->img !== null ? asset($userProfile->img) : asset('img/sampleUserImage.png') }}" alt="イメージ画像">
                 </div>
+
                 <div class="form__img--select-button">
-                    <label for="img">商品画像</label>
+                    <!-- <label for="img">商品画像</label> -->
                     <div class="form__item--border">
-                        <div class="form__image--select-button">
+                        <!-- <div class="form__image--select-button">
                             <input class="form__item--control" type="file" name="img">
-                            <!-- <button>画像を選択する</button> -->
-                        </div>
+                        </div> -->
+                        <input type="file" onchange="onChangeFileInput(this)" id="fileElem" multiple accept="image/*" style="display:none" name="img" />
+                        <button id="fileSelect" type="button">画像を選択する</button>
+                        <script src="{{ asset('/js/thumbnail.js') }}"></script>
                     </div>
                 </div>
             </div>

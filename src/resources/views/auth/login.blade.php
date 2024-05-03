@@ -8,6 +8,11 @@
 @section('content')
 
 <div class="login-form">
+    @if(session('message'))
+    <div class="message">
+        {{ session('message') }}
+    </div>
+    @endif
     <div class="login-form__title">
         ログイン
     </div>
