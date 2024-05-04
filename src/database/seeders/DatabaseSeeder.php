@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
         // $this->call(ItemsTableSeeder::class);
 
         // $this->call(ItemImagesTableSeeder::class);
-        $this->call(DeliveryAddressesTableSeeder::class);
+        // $this->call(DeliveryAddressesTableSeeder::class);
         // $this->call(ItemCategoriesTableSeeder::class);
         // $this->call(LikesTableSeeder::class);
 
-        // $this->call(TransactionsTableSeeder::class);
+        $this->call(TransactionsTableSeeder::class);
         // $this->call(OrdersTableSeeder::class);
     }
 }

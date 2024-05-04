@@ -13,7 +13,8 @@
 <div class="form__submit">
     {{ session('error') }}
 </div>
-<form class="form__wrapper" action="{{ route('purchase', ['item_id' => $item->id] ) }}" method="POST">
+<p>{{ config('stripe.stripe_public_key') }}</p>
+<form id="card-form" class="form__wrapper" action="{{ route('purchase', ['item_id' => $item->id] ) }}" method="POST">
     @csrf
     <div class="confirm-purchase__container">
 
@@ -53,16 +54,41 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="maker" value="place" onclick="formSwitch()">
-                            <label class="form-check-label">銀行振込</label>
+                            <label class="form-check-label">コンビニ支払い</label>
                         </div>
-
 
                         <ul>
                             <div id="foodList">
-                                <li>お寿司</li>
-                                <li>アイスクリーム</li>
-                                <li>チーズケーキ</li>
-                                <li>お団子</li>
+
+                                <label for="card-number">カード番号</label>
+                                <div id="card-number" class="form-control"></div>
+
+                                <!-- <div>
+                                    <label for="card-number">カード番号</label>
+                                    <input type="text" id="card-number" class="form-control">
+                                </div> -->
+
+                                <!-- <div>
+                                    <label for="card-expiry">有効期限</label>
+                                    <input type="text" id="card-expiry" class="form-control">
+                                </div>
+
+                                <div>
+                                    <label for="card-cvc">セキュリティコード</label>
+                                    <input type="text" id="card-cvc" class="form-control">
+                                </div> -->
+
+                                <div>
+                                    <label for="card_expiry">有効期限</label>
+                                    <div id="card-expiry" class="form-control"></div>
+                                </div>
+
+                                <div>
+                                    <label for="card-cvc">セキュリティコード</label>
+                                    <div id="card-cvc" class="form-control"></div>
+                                </div>
+
+                                <div id="card-errors" class="text-danger"></div>
                             </div>
                             <div id="placeList">
                                 <li>自由が丘</li>
@@ -133,14 +159,92 @@
                 </table>
             </div>
             <div class="confirm-purchase__payment-info--button">
-                @if($transaction == 'listed')
-                <button>購入する</button>
+                @if($transaction->transaction_type == 'listed')
+                <button type="submit">購入する</button>
                 @else
-                現在購入できません
+
+                @endif
+                @if (session('flash_alert'))
+                <div class="alert alert-danger">{{ session('flash_alert') }}</div>
+                @elseif(session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
                 @endif
             </div>
         </div>
 
     </div>
 </form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    /* 基本設定*/
+    const stripe_public_key = "{{ config('services.stripe.public.key') }}"
+    const stripe = Stripe(stripe_public_key);
+    const elements = stripe.elements();
+
+    var cardNumber = elements.create('cardNumber');
+    cardNumber.mount('#card-number');
+    cardNumber.on('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    var cardExpiry = elements.create('cardExpiry');
+    cardExpiry.mount('#card-expiry');
+    cardExpiry.on('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    var cardCvc = elements.create('cardCvc');
+    cardCvc.mount('#card-cvc');
+    cardCvc.on('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    var form = document.getElementById('card-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var errorElement = document.getElementById('card-errors');
+        if (event.error) {
+            errorElement.textContent = event.error.message;
+        } else {
+            errorElement.textContent = '';
+        }
+
+        stripe.createToken(cardNumber).then(function(result) {
+            if (result.error) {
+                errorElement.textContent = result.error.message;
+            } else {
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+
+    function stripeTokenHandler(token) {
+        var form = document.getElementById('card-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput); // トークンをフォームに追加
+        form.submit(); // フォームを送信
+    }
+</script>
+
 @endsection

@@ -14,6 +14,8 @@ return [
     |
     */
 
+    'name' => env('APP_NAME', 'Laravel'),
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
@@ -28,6 +30,15 @@ return [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+        ],
+    ],
+
+    'stripe' => [
+        'public' => [
+            'key' => env('STRIPE_PUBLIC_KEY'),
+        ],
+        'secret' => [
+            'key' => env('STRIPE_SECRET_KEY'),
         ],
     ],
 
