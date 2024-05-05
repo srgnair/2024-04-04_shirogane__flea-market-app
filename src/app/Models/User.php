@@ -39,7 +39,7 @@ class User extends Authenticatable
     }
 
     public function is_like($item_id)
-    {   
+    {
         return $this->like_items()->where('item_id', $item_id)->exists();
     }
 
@@ -65,7 +65,8 @@ class User extends Authenticatable
         'post_code',
         'address',
         'building_name',
-        'img'
+        'img',
+        'role'
     ];
 
     /**

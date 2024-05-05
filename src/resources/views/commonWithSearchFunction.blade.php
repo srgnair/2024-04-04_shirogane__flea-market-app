@@ -24,8 +24,26 @@
                 <input class="header__search-function--input" type="text" name="keyword" placeholder=" なにをお探しですか？">
                 <input type="submit" value="検索">
             </div>
+            @if(Auth::check() && Auth::user()->role === 'admin')
+            <ul class="header__ul">
+                <form action="/logout" method="post">
+                    @csrf
+                    <li>
+                        <button class="header__ul--button">
+                            ログアウト
+                        </button>
+                    </li>
+                </form>
+                <li>
+                    <a href="{{ route('adminView') }}">
+                        <button class="header__ul--button">
+                            管理者
+                        </button>
+                    </a>
+                </li>
+            </ul>
 
-            @if(Auth::check())
+            @elseif(Auth::check())
             <ul class="header__ul">
                 <form action="/logout" method="post">
                     @csrf

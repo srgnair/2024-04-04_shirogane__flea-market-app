@@ -78,5 +78,11 @@ Route::middleware('web')->group(
             Route::get('/create', [PaymentController::class, 'create'])->name('create');
             Route::post('/store', [PaymentController::class, 'store'])->name('store');
         });
+
+        Route::get('/admin_top', [TestController::class, 'adminView'])->name('adminView');
+        Route::get('/admin_add', [TestController::class, 'addNewAdminView'])->name('addNewAdminView');
+        Route::post('/admin_add', [TestController::class, 'addNewAdmin'])->name('addNewAdmin');
+        Route::get('/admin_item_list', [TestController::class, 'itemListView'])->name('itemListView');
+        Route::get('/admin_email', [TestController::class, 'sendEmailView'])->name('sendEmailView');
     }
 );

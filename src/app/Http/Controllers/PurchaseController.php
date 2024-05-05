@@ -47,6 +47,7 @@ class PurchaseController extends Controller
         //transactionがlistedの場合のみボタンが押せる
         //配送先を出品者にどのように伝える？
         //transactionテーブルを購入済みに変更する（ー＞購入済みはトップページの左上にSOLDの表示）
+        //
 
         $item = Item::find($item_id);
 
@@ -73,6 +74,7 @@ class PurchaseController extends Controller
         if ($transaction) {
             // transaction_typeを「購入済み」に更新
             $transaction->transaction_type = 'purchased';
+            $transaction->amount = $item->price;
             $transaction->save();
 
             return redirect()->route('confirmPurchaseView', ['item_id' => $item_id])->with('message', '購入が完了しました。');

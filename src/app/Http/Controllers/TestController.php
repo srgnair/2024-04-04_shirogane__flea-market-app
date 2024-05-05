@@ -9,12 +9,12 @@ use App\Models\ItemImage;
 use App\Models\ItemCategory;
 use App\Models\Comment;
 use App\Models\DeliveryAddress;
-use App\Models\Like;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotificationEmail;
 
 class TestController extends Controller
 {
@@ -75,7 +75,6 @@ class TestController extends Controller
         $userData = $request->except('_token');
         $userData['user_id'] = $user_id;
 
-
         // 既存の住所があるかチェック
         $shippingAddress = DeliveryAddress::where('user_id', $user_id)->first();
 
@@ -103,5 +102,65 @@ class TestController extends Controller
     public function create()
     {
         return view('payment.create');
+    }
+
+    public function adminView()
+    {
+        return view('admin.admin-top');
+    }
+
+    public function addNewAdminView()
+    {
+        return view('admin.add-new-admin');
+    }
+
+    public function addNewAdmin(Request $request)
+    {
+        dd($request->all());
+
+        $newAdmin['user_name'] = $request->user_name;
+        $newAdmin['password'] = Hash::make($request->password);
+
+        User::create($newAdmin);
+
+        // $user->sendEmailVerificationNotification();
+
+        return redirect()->route('addNewAdminView')->with(compact('message'));
+    }
+
+    public function itemListView()
+    {
+        //item.phpとtransaction.phpの値をわたす
+
+        $items = Item::with('transaction')->orderBy('id', 'asc')->get();
+
+        return view('admin.for-admin-item-list', compact('items'));
+    }
+
+    public function sendEmailView()
+    {
+        //ユーザー情報を渡す
+        return view('admin.send-email');
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $subject = $request->input('subject');
+        $body = $request->input('body');
+        $recipient = $request->input('recipient');
+
+        $notificationEmail = new NotificationEmail($subject, $body);
+
+        Mail::to($recipient)->send($notificationEmail);
+
+        if (count(Mail::failures()) > 0) {
+            $message = 'メール送信に失敗しました';
+
+            return back()->withErrors($message);
+        } else {
+            $message = 'メールを送信しました';
+
+            return redirect()->route('sendEmailView')->with(compact('message'));
+        }
     }
 }
