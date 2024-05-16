@@ -17,26 +17,32 @@ class ItemImagesTableSeeder extends Seeder
     {
         DB::table('item_images')->insert([
             [
-                'item_id' => '1',
+                'item_id' => '41',
                 'image' => 'img/itemImage.png',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'item_id' => '2',
+                'item_id' => '42',
                 'image' => 'img/t-shirt.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'item_id' => '3',
+                'item_id' => '43',
                 'image' => 'img/stuffed-animal.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'item_id' => '4',
+                'item_id' => '44',
                 'image' => 'img/bag.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'item_id' => '45',
+                'image' => 'img/stuffed-animal.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

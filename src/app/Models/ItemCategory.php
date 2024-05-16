@@ -16,4 +16,17 @@ class ItemCategory extends Model
     protected $fillable = [
         'category',
     ];
+
+    public function getCategoryAttribute($value)
+    {
+        $Categories = [
+            '1' => 'ファッション',
+            '2' => 'ベビー・キッズ',
+            '3' => 'ゲーム・おもちゃ・グッズ',
+            '4' => 'メンズ',
+            '5' => 'レディース'
+        ];
+
+        return $Categories[$value] ?? $value;
+    }
 }

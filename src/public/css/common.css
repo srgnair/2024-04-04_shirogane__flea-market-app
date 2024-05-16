@@ -66,13 +66,13 @@ letter-spacing: 1px;
 cursor: pointer;
 }
 
-.header__search-function{
+.header__search-function--wrapper{
     width: 40%;
     display: flex;
 }
 
 .header__search-function--input {
-width: 100%;
+width: 30%;
 }
 
 .header__search-function input {
@@ -81,6 +81,10 @@ line-height: 30px;
 
 .header__search-function input:last-child {
 padding: 0 10px 0;
+}
+
+.header__search-function select{
+    width: 20%;
 }
 
 .header__list-button {

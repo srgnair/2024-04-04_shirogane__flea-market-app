@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationEmail;
+use App\Models\Review;
 
 class TestController extends Controller
 {
@@ -116,22 +117,36 @@ class TestController extends Controller
 
     public function addNewAdmin(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
-        $newAdmin['user_name'] = $request->user_name;
-        $newAdmin['password'] = Hash::make($request->password);
+        // $newAdmin['email'] = $request->email;
+        // $newAdmin['user_name'] = $request->user_name;
+        // $newAdmin['password'] = Hash::make($request->password);
 
-        User::create($newAdmin);
+        // User::create($newAdmin);
 
-        // $user->sendEmailVerificationNotification();
+        // Log::info('New admin data added: ' . json_encode($newAdmin));
 
-        return redirect()->route('addNewAdminView')->with(compact('message'));
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $role = 'admin';
+
+        $hashedPassword = Hash::make($password);
+
+        User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $hashedPassword,
+            'role' => $role,
+        ]);
+
+        return redirect()->route('addNewAdminView')->with('message', '登録されました！');
     }
 
     public function itemListView()
     {
         //item.phpとtransaction.phpの値をわたす
-
         $items = Item::with('transaction')->orderBy('id', 'asc')->get();
 
         return view('admin.for-admin-item-list', compact('items'));
@@ -140,7 +155,8 @@ class TestController extends Controller
     public function sendEmailView()
     {
         //ユーザー情報を渡す
-        return view('admin.send-email');
+        $users = User::all();
+        return view('admin.send-email', compact('users'));
     }
 
     public function sendEmail(Request $request)
@@ -148,19 +164,89 @@ class TestController extends Controller
         $subject = $request->input('subject');
         $body = $request->input('body');
         $recipient = $request->input('recipient');
-
         $notificationEmail = new NotificationEmail($subject, $body);
 
-        Mail::to($recipient)->send($notificationEmail);
+        try {
+            // メール送信処理
+            Mail::to($recipient)->send($notificationEmail);
 
-        if (count(Mail::failures()) > 0) {
-            $message = 'メール送信に失敗しました';
-
-            return back()->withErrors($message);
-        } else {
             $message = 'メールを送信しました';
-
             return redirect()->route('sendEmailView')->with(compact('message'));
+        } catch (\Exception $e) {
+            $message = 'メール送信に失敗しました';
+            return back()->withErrors($message);
         }
+    }
+
+    public function confirmAmountView()
+    {
+        $amounts = Item::with('transaction')->orderBy('id', 'asc')->get();
+
+        return view('admin.confirm-amount', compact('amounts'));
+    }
+
+    // public function sendShippingNotification($name, $productName)
+    // {
+    //     $name =  ;
+
+    //     return view('shipping.notification', compact('name', 'productName'));
+    // }
+
+    public function reviewView($id)
+    {
+        return view('review', ['id' => $id]);
+    }
+
+    public function postReview(Request $request, $id)
+    {
+        $user_id = Auth::id();
+
+        // $idを使ってtransactionテーブルからデータを取得
+        $transaction = Transaction::find($id);
+
+        if (!$transaction) {
+            return redirect()->back()->with('error', '取引が見つかりませんでした');
+        }
+
+        // 同じ取引に対して既にレビューが投稿されているかを確認
+        $existingReview = Review::where(
+            'transaction_id',
+            $transaction->id
+        )
+            ->where('reviewer_id', $user_id)
+            ->first();
+
+        if ($existingReview) {
+            return redirect()->back()->with('error', 'この取引に対しては既にレビューを投稿済みです');
+        }
+
+        // $user_idが$transaction->seller_idと一致なら、$review['reviewee_id']には$transaction->buyer_idを入れる
+        if ($user_id == $transaction->seller_id) {
+            $reviewee_id = $transaction->buyer_id;
+        }
+        // $user_idが$transaction->buyer_idと一致なら、$review['reviewee_id']には$transaction->seller_idを入れる
+        elseif ($user_id == $transaction->buyer_id) {
+            $reviewee_id = $transaction->seller_id;
+        }
+        // それ以外の場合はエラーを返す
+        else {
+            return redirect()->back()->with('error', 'この取引のレビューを投稿する権限がありません');
+        }
+
+        // リクエストから全ての入力データを取得
+        $review = $request->all();
+        $review['reviewer_id'] = $user_id;
+        $review['reviewee_id'] = $reviewee_id;
+        $review['transaction_id'] = $transaction->id;
+
+        // レビューをデータベースに保存
+        Review::create($review);
+
+        // transaction_typeを変更
+        $transaction->transaction_type = 'commentOK';
+        $transaction->save();
+
+        // 'id'パラメータを渡してリダイレクト
+        return redirect()->route('reviewView', ['id' => $id])->with('message', '登録されました！');
     }
 }

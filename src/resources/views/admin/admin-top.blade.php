@@ -20,7 +20,7 @@
         </li>
         <li>
             <div class="admin__link">
-                <a href="{{ route('addNewAdminView') }}">出品者への送金額確認</a>
+                <a href="{{ route('confirmAmountView') }}">出品者への送金額確認</a>
             </div>
         </li>
         <li>

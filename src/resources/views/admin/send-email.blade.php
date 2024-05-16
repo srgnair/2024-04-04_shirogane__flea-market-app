@@ -20,9 +20,9 @@
                     <div class="form__item">
                         <select name="recipient">
                             <option value="">宛先を選択してください</option>
-                            @foreach($reserves as $reserve)
-                            @if($reserve->user)
-                            <option value="{{ $reserve->user->email }}">{{ $reserve->user->name }}</option>
+                            @foreach($users as $user)
+                            @if($user)
+                            <option value="{{ $user->email }}">{{ $user->user_name }}</option>
                             @endif
                             @endforeach
                         </select>

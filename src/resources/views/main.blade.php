@@ -21,7 +21,9 @@
     <div class="main__content--cards">
         @foreach($items as $item)
         @foreach($item->itemImages as $itemImage)
-        <div class="main__content--card">
+
+        <!-- <div @if($item->transaction->transaction_type === 'listed') class="card" @else class="card__sold" @endif> -->
+        <div @if($item->transaction->transaction_type === 'listed') class="card" @else class="card__sold" @endif>
             <a href="{{ route('detailView', ['id' => $item->id]) }}" class="card__link">
                 <div class="card__image-container">
                     <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">

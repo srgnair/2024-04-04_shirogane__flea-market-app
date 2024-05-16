@@ -18,7 +18,7 @@ class LikesTableSeeder extends Seeder
         DB::table('likes')->insert([
             [
                 'user_id' => '1',
-                'item_id' => '1',
+                'item_id' => '41',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

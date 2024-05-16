@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ItemImage;
 use App\Models\Transaction;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
 class MyPageController extends Controller
@@ -26,10 +27,20 @@ class MyPageController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
+        foreach ($sellersItems as $sellersItem) {
+            // 評価を取得
+            $review = Review::where('reviewer_id', $sellersItem->buyer_id)
+                ->where('reviewee_id', $sellersItem->seller_id)
+                ->first();
+
+            // $sellersItemに$reviewを関連付ける
+            $sellersItem->review = $review;
+        }
+
         // 購入した商品の画像を取得
         $itemImages = ItemImage::whereIn('item_id', $sellersItems->pluck('item_id'))->get();
 
-        return view('mypage', compact('sellersItems', 'itemImages', 'user'));
+        return view('mypage', compact('sellersItems', 'itemImages', 'user', 'review'));
     }
 
     public function mypagePurchasedItemsView()

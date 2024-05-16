@@ -47,8 +47,18 @@ Route::middleware('web')->group(
         Route::get('/', [MainPageController::class, 'mainView'])->name('mainView');
 
         Route::get('/detail/{id}', [DetailPageController::class, 'detailView'])->name('detailView');
+        Route::post('/detail/{id}/shipping', [DetailPageController::class, 'updateShippingStatusCurrently'])->name('StatusCurrently');
+        Route::post('/detail/{id}/shipping_complete', [DetailPageController::class, 'updateShippingStatusComplete'])->name('StatusComplete');
 
         // 以下要認証
+
+        Route::get('/admin_top', [TestController::class, 'adminView'])->name('adminView');
+        Route::get('/admin_add', [TestController::class, 'addNewAdminView'])->name('addNewAdminView');
+        Route::post('/admin_add', [TestController::class, 'addNewAdmin'])->name('addNewAdmin');
+        Route::get('/admin_item_list', [TestController::class, 'itemListView'])->name('itemListView');
+        Route::get('/admin_email', [TestController::class, 'sendEmailView'])->name('sendEmailView');
+        Route::post('/admin_email', [TestController::class, 'sendEmail'])->name('sendEmail');
+        Route::get('/admin_confirm_amount', [TestController::class, 'confirmAmountView'])->name('confirmAmountView');
 
         Route::get('/detail/comment/{item_id}', [CommentController::class, 'commentView'])->name('commentView');
         Route::post('/detail/comment/submit/{item_id}', [CommentController::class, 'comment'])->name('comment');
@@ -68,6 +78,9 @@ Route::middleware('web')->group(
         Route::get('/display_item', [DisplayController::class, 'displayItemView'])->name('displayItemView');
         Route::post('/display_item', [DisplayController::class, 'displayItem'])->name('displayItem');
 
+        Route::get('/review/{id}', [TestController::class, 'reviewView'])->name('reviewView');
+        Route::post('/review/{id}', [TestController::class, 'postReview'])->name('postReview');
+
         Route::post('/{item_id}', [LikeController::class, 'like'])->name('like');
         Route::delete('/{item_id}', [LikeController::class, 'deleteLike'])->name('deleteLike');
 
@@ -78,11 +91,5 @@ Route::middleware('web')->group(
             Route::get('/create', [PaymentController::class, 'create'])->name('create');
             Route::post('/store', [PaymentController::class, 'store'])->name('store');
         });
-
-        Route::get('/admin_top', [TestController::class, 'adminView'])->name('adminView');
-        Route::get('/admin_add', [TestController::class, 'addNewAdminView'])->name('addNewAdminView');
-        Route::post('/admin_add', [TestController::class, 'addNewAdmin'])->name('addNewAdmin');
-        Route::get('/admin_item_list', [TestController::class, 'itemListView'])->name('itemListView');
-        Route::get('/admin_email', [TestController::class, 'sendEmailView'])->name('sendEmailView');
     }
 );

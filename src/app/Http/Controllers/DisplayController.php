@@ -26,6 +26,7 @@ class DisplayController extends Controller
         Log::info($request->all());
 
         $user_id = Auth::id();
+        // $category_id =  $request->input('category');
 
         $newItem = new Item();
         $newItem->item_name = $request->input('item_name');
@@ -33,16 +34,21 @@ class DisplayController extends Controller
         $newItem->price = $request->input('price');
         $newItem->description = $request->input('description');
         $newItem->condition = $request->input('condition');
-        // $newItem->user_id = $user_id;
+        $newItem->seller_id = $user_id;
         $newItem->save();
 
         // 新しいアイテムのIDを取得
         $item_id = $newItem->id;
 
         $newItemCategory = new ItemCategory();
-        $newItemCategory->category = $request->input('category');
+        $newItemCategory->category =
+        $request->input('category');
         $newItemCategory->item_id = $item_id;
         $newItemCategory->save();
+
+        // 新しいアイテムのカテゴリーIDを設定する
+        $newItem->category_id = $newItemCategory->id;
+        $newItem->save();
 
         $newItemImage = new ItemImage();
         $newItemImageFile = $request->file('image');
@@ -54,7 +60,7 @@ class DisplayController extends Controller
 
         $newItemTransaction = new Transaction();
         $newItemTransaction->seller_id = $user_id;
-        $newItemTransaction->buyer_id = $user_id;
+        // $newItemTransaction->buyer_id = $user_id;
         $newItemTransaction->item_id = $item_id;
         $newItemTransaction->transaction_type = 'listed';
         $newItemTransaction->save();

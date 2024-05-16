@@ -54,23 +54,33 @@
                     @error('category')
                     <p>{{$errors->first('category')}}</p>
                     @enderror
-                    <input type="text" name="category" value="{{ old('category') }}" />
-                    <!-- <select id="selectArea" name="area" class="form__item--control">
-                        <option value="">area</option>
-                        <option value="1">東京都</option>
-                        <option value="2">大阪府</option>
-                        <option value="3">福岡県</option>
-                    </select> -->
+                    <!-- <input type="text" name="category" value="{{ old('category') }}" /> -->
+                    <select id="selectCategory" name="category" class="form__item--control">
+                        <option value="">選択してください</option>
+                        <option value="1">ファッション</option>
+                        <option value="2">ベビー・キッズ</option>
+                        <option value="3">ゲーム・おもちゃ・グッズ</option>
+                        <option value="4">メンズ</option>
+                        <option value="5">レディース</option>
+                    </select>
                 </div>
                 <div class="form__item">
                     <label for="condition">商品の状態</label>
                     @error('condition')
                     <p>{{$errors->first('condition')}}</p>
                     @enderror
-                    <input type="text" name="condition" value="{{ old('condition') }}" />
+                    <!-- <input type="text" name="condition" value="{{ old('condition') }}" /> -->
+                    <select id="selectCondition" name="condition" class="form__item--control">
+                        <option value="">選択してください</option>
+                        <option value="1">新品、未使用</option>
+                        <option value="2">未使用に近い</option>
+                        <option value="3">目立った傷や汚れなし</option>
+                        <option value="4">やや傷や汚れあり</option>
+                        <option value="5">傷や汚れあり</option>
+                    </select>
                 </div>
                 <div class="form__item">
-                    <label for="condition">商品の状態</label>
+                    <label for="condition">ブランド名</label>
                     @error('brand_name')
                     <p>{{$errors->first('brand_name')}}</p>
                     @enderror

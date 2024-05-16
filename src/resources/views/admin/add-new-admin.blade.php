@@ -7,7 +7,11 @@
 @endsection
 @section('content')
 <div class="adminContents">
-
+    @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
     <div class="adminContents">
         <div class="adminContents__title">
             管理者の作成

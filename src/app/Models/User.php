@@ -58,6 +58,18 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    // 評価したレビュー
+    public function givenReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewer_id');
+    }
+
+    // 評価されたレビュー
+    public function receivedReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewee_id');
+    }
+
     protected $fillable = [
         'email',
         'password',

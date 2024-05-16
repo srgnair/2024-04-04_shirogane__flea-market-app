@@ -75,7 +75,11 @@ class PurchaseController extends Controller
             // transaction_typeを「購入済み」に更新
             $transaction->transaction_type = 'purchased';
             $transaction->amount = $item->price;
+            $transaction->buyer_id = Auth::user()->id;
             $transaction->save();
+
+            $item->buyer_id = Auth::user()->id;
+            $item->save();
 
             return redirect()->route('confirmPurchaseView', ['item_id' => $item_id])->with('message', '購入が完了しました。');
         } else {

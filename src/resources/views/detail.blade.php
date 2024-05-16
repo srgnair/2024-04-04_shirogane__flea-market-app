@@ -8,6 +8,26 @@
 @endsection
 @section('content')
 
+<!-- AuthIdがseller_idでかつ表示中アイテムのtransaction_typeがpurchasedの場合にボタンを表示 -->
+
+@if(Auth::user()->id == $item->seller_id && $item->transaction->transaction_type == 'purchased')
+<div>
+    商品が購入されました。発送しましたら以下のボタンを押してください。
+    <form class="form__wrapper" action="{{ route('StatusCurrently', ['id' => $item->id] ) }}" method="POST">
+        @csrf
+        <button type="submit">発送しました</button>
+    </form>
+</div>
+@elseif(Auth::id() == $item->buyer_id && $item->transaction->transaction_type == 'currentlyShipping')
+<div>
+    商品が発送されました。商品を受け取りましたら以下のボタンを押してください。
+    <form class="form__wrapper" action="{{ route('StatusComplete', ['id' => $item->id] ) }}" method="POST">
+        @csrf
+        <button type="submit">商品を受け取りました</button>
+    </form>
+</div>
+@endif
+
 <div class="detail">
 
     <div class="detail__img">

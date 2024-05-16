@@ -13,9 +13,29 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
     public function item()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Item::class);
+    }
+
+    public function itemName()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 
     protected $fillable = [
@@ -35,5 +55,4 @@ class Transaction extends Model
 
         return $status[$value] ?? $value;
     }
-
 }

@@ -46,7 +46,8 @@ margin-left: 60px;
     padding: 0 50px;
 }
 
-.main__content--card {
+.card,
+.card__sold {
     text-align: left;
     /* width: 15%; */
     margin: 15px;
@@ -56,7 +57,8 @@ margin-left: 60px;
     height: 200px; /* カードの高さ */
 }
 
-.main__content--card img{
+.card img,
+.card__sold img{
     width: 100%;
 }
 
@@ -96,7 +98,7 @@ margin-left: 60px;
     object-fit: contain; /* 画像が切れることなくコンテナー内に収まるように調整 */
 }
 
-.main__content--card:before {
+.card__sold:before {
     position: absolute;
     content: "";
     left: 0;
@@ -109,7 +111,7 @@ margin-left: 60px;
     z-index: 2; /* 新たに追加 */
 }
 
-.main__content--card:after {
+.card__sold:after {
     position: absolute;
     content: "SOLD";
     transform: rotate(315deg);
