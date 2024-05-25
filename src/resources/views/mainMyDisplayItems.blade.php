@@ -20,20 +20,20 @@
 <div class="main__content">
     <div class="main__content--cards">
         @foreach($likeItems as $likeItem)
-        @foreach($itemImages as $itemImage)
-        <!-- <a href="{{ route('detailView', ['id' => $likeItem->id]) }}">
-            <img src="{{ $itemImage->image }}" alt="イメージ画像">
-        </a> -->
-        <div class="main__content--card">
-            <a href="{{ route('detailView', ['id' => $likeItem->id]) }}" class="card__link">
+        <div class="card">
+            <a href="{{ route('detailView', ['id' => $likeItem->item->id]) }}" class="card__link">
                 <div class="card__image-container">
                     <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
-                    <img class="card__item-image" src="{{ $itemImage->image }}" alt="イメージ画像">
+                    @if(isset($itemImages[$likeItem->item->id]))
+                    <img class="card__item-image" src="{{ $itemImages[$likeItem->item->id]->image }}" alt="イメージ画像">
+                    @else
+                    <p>画像が見つかりません</p>
+                    @endif
                 </div>
             </a>
         </div>
         @endforeach
-        @endforeach
     </div>
+
 </div>
 @endsection

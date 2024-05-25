@@ -67,23 +67,37 @@
         </div>
         <div class="comment__item-info--talk-history-wrapper">
             <div class="comment__item-info--talk-history">
-                トーク履歴
+
                 @if($comments->isEmpty())
                 <p>コメントはありません</p>
                 @else
                 @foreach($comments as $comment)
                 @if($comment->item_id == $item_id)
                 <div class="@if($comment->user_id == auth()->id()) comment-right @else comment-left @endif">
+                    <div class="comment__user-icon">
 
-                    <form action="{{ route('commentDelete', ['comment_id' => $comment->id, 'item_id' => $item_id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="reserve__edit">
-                            <p>{{ $comment->text }}</p>
-                        </button>
-                    </form>
+                        @if (Auth::check() && Auth::user()->img !== null)
+                        <img src="{{ asset($comment->user->img) }}" alt="イメージ画像">
+                        @else
+                        <img src="{{ asset('img/sampleUserImage.png') }}" alt="イメージ画像">
+                        @endif
 
-
+                    </div>
+                    <div class="comment__name">
+                        {{ $comment->user->user_name}}
+                    </div>
+                    <div class="comment__trash">
+                        <form action="{{ route('commentDelete', ['comment_id' => $comment->id, 'item_id' => $item_id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="reserve__edit">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="comment__text">
+                    {{ $comment->text }}
                 </div>
                 @endif
                 @endforeach
@@ -101,6 +115,9 @@
                 <div class="comment__item-info--input">
                     <textarea name="text" cols="30" rows="10"></textarea>
                 </div>
+                @error('text')
+                <p>{{$errors->first('text')}}</p>
+                @enderror
                 <div class="comment__item-info--button">
                     <button>コメントを送信する</button>
                 </div>

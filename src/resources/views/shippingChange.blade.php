@@ -12,6 +12,15 @@
         <div class="shipping-change__title">
             住所の変更
         </div>
+        @error('post_code')
+        <p>{{$errors->first('post_code')}}</p>
+        @enderror
+        @error('address')
+        <p>{{$errors->first('address')}}</p>
+        @enderror
+        @error('building_name')
+        <p>{{$errors->first('building_name')}}</p>
+        @enderror
         <div class="shipping-change-form">
             <div class="form__item">
                 <label for="post_code">郵便番号</label>

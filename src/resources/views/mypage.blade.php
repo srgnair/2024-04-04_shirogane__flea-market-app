@@ -28,16 +28,16 @@
         </a>
     </div>
 </div>
-
+<!-- 
 @foreach ($sellersItems as $sellersItem)
-@if ($sellersItem->transaction_type == 'complete' && Auth::id() === $sellersItem->buyer_id && !$review)
+@if ($sellersItem->transaction_type == 'waiting_review_buyer' && Auth::id() === $sellersItem->buyer_id && !$review)
 <div class="review">
     以下のボタンから出品者の評価を完了させてください。
     <div class="link">
         <a href="{{ route('reviewView', ['id' => $sellersItem->id]) }}">評価をする</a>
     </div>
 </div>
-@elseif($review && $sellersItem->transaction_type == 'complete' && Auth::id() == $sellersItem->seller_id)
+@elseif($review && $sellersItem->transaction_type == 'waiting_review_seller' && Auth::id() == $sellersItem->seller_id)
 <div class="review">
     以下のボタンから販売者の評価を完了させてください。
     <div class="admin__link">
@@ -45,9 +45,7 @@
     </div>
 </div>
 @endif
-@endforeach
-
-
+@endforeach -->
 
 <div class="mypage__menu">
     <ul>
@@ -77,17 +75,21 @@
     </div> -->
     <div class="mypage__content--cards">
         @foreach($sellersItems as $index => $sellersItem)
-        <div class="mypage__content--card">
+        @if($sellersItem->item->seller_id)
+        <!-- <div class="mypage__content--card"> -->
+        <div @if($sellersItem->item->transaction->transaction_type === 'listed') class="card" @else class="card__sold" @endif>
             <a href="{{ route('detailView', ['id' => $sellersItem->item->id]) }}" class="card__link">
                 <div class="card__image-container">
                     <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
                     <!-- 対応する$itemImagesのインデックスを使って画像を表示 -->
-                    <img class="card__item-image" src="{{ $itemImages[$index]->image }}" alt="イメージ画像">
+                    <img class="card__item-image" src="{{ asset($itemImages[$index]->image) }}" alt="イメージ画像">
                 </div>
             </a>
         </div>
+        @endif
         @endforeach
     </div>
+</div>
 
 </div>
 @endsection

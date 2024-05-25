@@ -7,9 +7,18 @@
 @endsection
 @section('content')
 <div class="list-item__container">
-    @if (count($errors) > 0)
+    <!-- @if (count($errors) > 0)
     <p>内容を確認してください</p>
-    @endif
+    @endif -->
+    <!-- @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif -->
     <div class="form__submit">
         {{ session('message') }}
     </div>
@@ -22,29 +31,20 @@
             商品の出品
         </div>
         <div class="list-item__form">
-
             <div class="form__item">
-                <!-- <label for="image">商品画像</label> -->
                 @error('image')
                 <p>{{$errors->first('image')}}</p>
                 @enderror
                 <div class="form__item--border">
                     <div class="form__image--select-button">
-                        <!-- <input class="form__item--control" type="file" name="image">
-                        <button>画像を選択する</button> -->
                         <input type="file" id="fileElem" multiple accept="image/*" style="display:none" name="image" />
                         <button id="fileSelect" type="button">画像を選択する</button>
-                        <script>
-                            const fileSelect = document.getElementById("fileSelect");
-                            const fileElem = document.getElementById("fileElem");
-
-                            fileSelect.addEventListener("click", (e) => {
-                                if (fileElem) {
-                                    fileElem.click();
-                                }
-                            }, false);
-                        </script>
                     </div>
+                    <script>
+                        document.getElementById('fileSelect').addEventListener('click', function() {
+                            document.getElementById('fileElem').click();
+                        });
+                    </script>
                 </div>
             </div>
             <div class="list-item__form">

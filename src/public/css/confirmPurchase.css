@@ -122,3 +122,8 @@ cursor: pointer;
     max-height: 100%;
     object-fit: contain; 
 }
+
+.payment-method__change-button,
+.container__shipping-address--change-button a{
+    color: #0073cc;
+}

@@ -9,6 +9,7 @@ use App\Models\ItemCategory;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\DisplayItemRequest;
 
 class DisplayController extends Controller
 {
@@ -17,7 +18,7 @@ class DisplayController extends Controller
         return view('displayItem');
     }
 
-    public function displayItem(Request $request)
+    public function displayItem(DisplayItemRequest $request)
     {
         //item、itemCategory、itemImageはテーブルが別
         //transactionテーブルをcreateする
@@ -42,7 +43,7 @@ class DisplayController extends Controller
 
         $newItemCategory = new ItemCategory();
         $newItemCategory->category =
-        $request->input('category');
+            $request->input('category');
         $newItemCategory->item_id = $item_id;
         $newItemCategory->save();
 

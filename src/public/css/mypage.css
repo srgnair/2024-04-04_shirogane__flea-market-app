@@ -15,8 +15,10 @@ width: 5%;
 }
 
 .mypage__user-info--img img{
-    width: 100%;
-    border-radius: 100px;
+        width: 50px;
+    height: 50px;
+    margin: auto 0;
+    border-radius: 50%;
 }
 
 .mypage__user-info--user-name {
@@ -80,15 +82,17 @@ margin-left: 60px;
     font-weight: bold;
     text-align: left;
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
+    justify-content: center;
+    align-items: center; 
     flex-wrap: wrap;
-    padding: 0 50px;
+    padding: 0;
 }
 
 .mypage__content--card {
     text-align: left;
-    width: 23%;
+    /* width: 30%; */
     margin: 10px;
     border-radius: 3px;
 }
@@ -104,10 +108,27 @@ margin-left: 60px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    padding: 0 50px;
+    padding: 0 0 0 30px;
+    width: 100%;
+    /* justify-content: center; */
 }
 
 .mypage__content--card {
+    text-align: center;
+    /* width: 15%; */
+    margin: 20px;
+    border-radius: 3px;
+    position: relative;
+    width: 200px; /* カードの幅 */
+    height: 200px; /* カードの高さ */
+}
+
+.mypage__content--card img{
+    width: 100%;
+}
+
+.card,
+.card__sold {
     text-align: left;
     /* width: 15%; */
     margin: 15px;
@@ -117,7 +138,8 @@ margin-left: 60px;
     height: 200px; /* カードの高さ */
 }
 
-.mypage__content--card img{
+.card img,
+.card__sold img{
     width: 100%;
 }
 
@@ -160,4 +182,33 @@ margin-left: 60px;
 li {
 list-style: none;
 padding-bottom: 10px;
+}
+
+
+.card__sold:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 50px 50px 0 0;
+    border-color: #f00 transparent transparent transparent;
+    z-index: 2; /* 新たに追加 */
+}
+
+.card__sold:after {
+    position: absolute;
+    content: "SOLD";
+    transform: rotate(315deg);
+    display: block;
+    font-size: 11px;
+    white-space: pre;
+    color: #fff;
+    top: 12px;
+    left: 2px;
+    text-align: center;
+    z-index: 3;
+    line-height: 1.2;
 }

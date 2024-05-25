@@ -23,27 +23,10 @@
                 <form action="{{ route('mainView') }}" method="GET">
                     @csrf
                     <div class="header__search-function">
-                        <select name="category">
-                            <option value="">全て</option>
-                            <option value="1">ファッション</option>
-                            <option value="2">ベビー・キッズ</option>
-                            <option value="3">ゲーム・おもちゃ・グッズ</option>
-                            <option value="3">メンズ</option>
-                            <option value="3">レディース</option>
-                        </select>
 
-                        <select name="condition">
-                            <option value="">全て</option>
-                            <option value="1">新品、未使用</option>
-                            <option value="2">未使用に近い</option>
-                            <option value="3">目立った傷や汚れなし</option>
-                            <option value="4">やや傷や汚れあり</option>
-                            <option value="5">傷や汚れあり</option>
-                        </select>
+                        <input class="header__search-function--input" type="text" name="keyword" value="{{ session('search_keyword') }}" placeholder=" なにをお探しですか？">
 
-                        <input class="header__search-function--input" type="text" name="keyword" placeholder=" なにをお探しですか？">
-
-                        <button type="submit">検索</button>
+                        <!-- <button type="submit">検索</button> -->
 
                     </div>
 

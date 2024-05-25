@@ -12,7 +12,15 @@
             メール送信
         </div>
         <div class="adminShopContents__content">
-
+            @error('recipient')
+            <p>{{$errors->first('recipient')}}</p>
+            @enderror
+            @error('subject')
+            <p>{{$errors->first('subject')}}</p>
+            @enderror
+            @error('body')
+            <p>{{$errors->first('body')}}</p>
+            @enderror
             <form class="form__wrapper" action="{{ route('sendEmail') }}" method="POST">
                 @csrf
                 <div class="form">
@@ -22,7 +30,7 @@
                             <option value="">宛先を選択してください</option>
                             @foreach($users as $user)
                             @if($user)
-                            <option value="{{ $user->email }}">{{ $user->user_name }}</option>
+                            <option value="{{ $user->email }}">{{ $user->user_name }}({{ $user->email}})</option>
                             @endif
                             @endforeach
                         </select>

@@ -41,7 +41,26 @@
 </div>
 
 <div class="mypage__content">
+
+    <!-- 確認が必要な商品一覧リスト -->
+
     <div class="mypage__content--cards">
+        <div class="mypage__content--cards">
+            @foreach($purchasedItems as $index => $purchasedItem)
+            <!-- <div class="mypage__content--card"> -->
+            <div @if($purchasedItem->item->transaction->transaction_type === 'listed') class="card" @else class="card__sold" @endif>
+                <a href="{{ route('detailView', ['id' => $purchasedItem->item->id]) }}" class="card__link">
+                    <div class="card__image-container">
+                        <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
+                        <!-- 対応する$itemImagesのインデックスを使って画像を表示 -->
+                        <img class="card__item-image" src="{{ asset($itemImages[$index]->image) }}" alt="イメージ画像">
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+        <!-- 
+
         @foreach($purchasedItems as $purchasedItem)
         @foreach($itemImages as $itemImage)
         <div class="mypage__content--card">
@@ -53,7 +72,7 @@
             </a>
         </div>
         @endforeach
-        @endforeach
+        @endforeach -->
     </div>
 </div>
 @endsection

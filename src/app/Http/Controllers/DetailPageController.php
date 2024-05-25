@@ -69,7 +69,7 @@ class DetailPageController extends Controller
             // メール送信後にテーブルのカラムを変更する処理
             if ($transaction) {
                 // transaction_typeを「購入済み」に更新
-                $transaction->transaction_type = 'currentlyShipping';
+                $transaction->transaction_type = 'waiting_arrival';
                 $transaction->save();
 
                 return redirect()->route('detailView', ['item_id' => $id])->with('message', '発送登録が完了しました。');
@@ -98,10 +98,10 @@ class DetailPageController extends Controller
             // メール送信後にテーブルのカラムを変更する処理
             if ($transaction) {
                 // transaction_typeを「購入済み」に更新
-                $transaction->transaction_type = 'complete';
+                $transaction->transaction_type = 'waiting_review_buyer';
                 $transaction->save();
 
-                return redirect()->route('detailView', ['item_id' => $id])->with('message', '受け取り登録が完了しました。');
+                return redirect()->route('detailView', ['item_id' => $id])->with('message', '受け取り登録が完了しました。レビューの登録をお願いします。');
             } else {
                 return redirect()->route('detailView', ['item_id' => $id])->with('error', 'エラーが発生しました。');
             }

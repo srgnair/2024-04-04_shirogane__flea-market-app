@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -33,7 +34,7 @@ class CommentController extends Controller
         return view('comment', compact('comments', 'user', 'item', 'itemImages', 'likes', 'item_id'));
     }
 
-    public function comment(Request $request, $item_id)
+    public function comment(CommentRequest $request, $item_id)
     {
         //コメントを送信する
         //コメントテーブルをcreateする

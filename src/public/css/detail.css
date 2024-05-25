@@ -63,7 +63,8 @@ letter-spacing: 1px;
 cursor: pointer;
 }
 
-.detail__item-info--item-wrapper {
+.detail__item-info--item-wrapper,
+.detail__item-info--item-condition-wrapper {
 display: flex;
 }
 
@@ -116,11 +117,12 @@ margin-bottom: 30px;
 }
 
 .condition__item {
+    display: inline;
 background-color: white;
 border-radius: 25px;
 padding: 3px 25px;
 font-size: small;
-margin-bottom: 100px;
+margin-bottom: 0;
 }
 
 .card__image-container {
@@ -150,4 +152,52 @@ margin-bottom: 100px;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain; /* 画像が切れることなくコンテナー内に収まるように調整 */
+}
+
+.message__update-status{
+    margin-bottom: 40px;
+}
+
+.card__sold {
+    text-align: left;
+    /* width: 15%; */
+    margin: 15px;
+    border-radius: 3px;
+    position: relative;
+    width: 350px; /* カードの幅 */
+    height: 350px; /* カードの高さ */
+}
+
+.card img,
+.card__sold img{
+    width: 100%;
+}
+
+
+.card__sold:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 50px 50px 0 0;
+    border-color: #f00 transparent transparent transparent;
+    z-index: 2; /* 新たに追加 */
+}
+
+.card__sold:after {
+    position: absolute;
+    content: "SOLD";
+    transform: rotate(315deg);
+    display: block;
+    font-size: 11px;
+    white-space: pre;
+    color: #fff;
+    top: 12px;
+    left: 2px;
+    text-align: center;
+    z-index: 3;
+    line-height: 1.2;
 }

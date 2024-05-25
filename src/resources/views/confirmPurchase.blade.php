@@ -13,7 +13,15 @@
 <div class="form__submit">
     {{ session('error') }}
 </div>
-<p>{{ config('stripe.stripe_public_key') }}</p>
+@if($item->transaction && $item->transaction->payment_method === 'customer_balance' && $item->transaction->transaction_type === 'waiting_payment' && $item->transaction->buyer_id === Auth::user()->id )
+<div>
+    購入を受け付けました。以下の口座に入金してください。
+    <br>
+    ×××
+    <!-- 振込完了ボタンを押すとステータスが変わる -->
+</div>
+@endif
+
 <form id="card-form" class="form__wrapper" action="{{ route('purchase', ['item_id' => $item->id] ) }}" method="POST">
     @csrf
     <div class="confirm-purchase__container">
@@ -21,7 +29,6 @@
         <div class="container__left">
 
             <div class="container__img--wrapper">
-
                 <div class="comment__img">
                     @foreach($itemImages as $itemImage)
                     <div class="card__image-container">
@@ -46,64 +53,42 @@
                     <div class="payment-method__title">
                         支払い方法
                     </div>
-                    <div class="payment-method__selected-button">
-                        <!-- ラジオボタンで選択 -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="maker" value="food" onclick="formSwitch()" checked>
-                            <label class="form-check-label">クレジットカード</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="maker" value="place" onclick="formSwitch()">
-                            <label class="form-check-label">コンビニ支払い</label>
-                        </div>
 
-                        <ul>
-                            <div id="foodList">
+                    <div class="paymentMethod">
+                        @if($item->transaction->payment_method === 'card')
+                        <div id="foodList">
+                            <label>
+                                <input type="hidden" name="payment_method" value="{{$item->transaction->payment_method}}"> クレジットカード決済
+                            </label><br>
+                            <label for="card-number">カード番号</label>
+                            <div id="card-number" class="form-control"></div>
 
-                                <label for="card-number">カード番号</label>
-                                <div id="card-number" class="form-control"></div>
-
-                                <!-- <div>
-                                    <label for="card-number">カード番号</label>
-                                    <input type="text" id="card-number" class="form-control">
-                                </div> -->
-
-                                <!-- <div>
-                                    <label for="card-expiry">有効期限</label>
-                                    <input type="text" id="card-expiry" class="form-control">
-                                </div>
-
-                                <div>
-                                    <label for="card-cvc">セキュリティコード</label>
-                                    <input type="text" id="card-cvc" class="form-control">
-                                </div> -->
-
-                                <div>
-                                    <label for="card_expiry">有効期限</label>
-                                    <div id="card-expiry" class="form-control"></div>
-                                </div>
-
-                                <div>
-                                    <label for="card-cvc">セキュリティコード</label>
-                                    <div id="card-cvc" class="form-control"></div>
-                                </div>
-
-                                <div id="card-errors" class="text-danger"></div>
+                            <div>
+                                <label for="card_expiry">有効期限</label>
+                                <div id="card-expiry" class="form-control"></div>
                             </div>
-                            <div id="placeList">
-                                <li>自由が丘</li>
-                                <li>下北沢</li>
-                                <li>吉祥寺</li>
-                                <li>高円寺</li>
+
+                            <div>
+                                <label for="card-cvc">セキュリティコード</label>
+                                <div id="card-cvc" class="form-control"></div>
                             </div>
-                        </ul>
+
+                            <div id="card-errors" class="text-danger"></div>
+                        </div>
+                        @elseif($item->transaction->payment_method ==='customer_balance')
+                        <label>
+                            <input type="hidden" name="payment_method_types" value="{{$item->transaction->payment_method}}">
+                        </label>銀行振込
+                        @else
+                        支払い方法を設定してください
+                        @endif
                     </div>
                 </div>
-
-                <div class="payment-method__change-button">
-                    変更する
+                <div class="container__shipping-address--change-button">
+                    <a href="{{ route('paymentMethodView', ['item_id' => $item->id]) }}">
+                        変更する
+                    </a>
                 </div>
-
             </div>
 
             <div class="container__shipping-address--wrapper">
@@ -137,7 +122,6 @@
             </div>
 
         </div>
-
         <div class="container__right">
 
             <div class="confirm-purchase__payment-info--table">
@@ -153,16 +137,21 @@
                         </tr>
                         <tr>
                             <th>支払い方法</th>
-                            <td>コンビニ払い</td>
+                            <td>
+                                @if($item->transaction->payment_method)
+                                {{ $item->transaction->payment_method}}
+                                @else
+                                支払い方法を設定してください
+                                @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="confirm-purchase__payment-info--button">
+
                 @if($transaction->transaction_type == 'listed')
                 <button type="submit">購入する</button>
-                @else
-
                 @endif
                 @if (session('flash_alert'))
                 <div class="alert alert-danger">{{ session('flash_alert') }}</div>
@@ -171,10 +160,12 @@
                     {{ session('status') }}
                 </div>
                 @endif
+                <!-- <p>{{ config('services.stripe.secret.key') }}</p> -->
             </div>
         </div>
 
     </div>
+
 </form>
 
 <script src="https://js.stripe.com/v3/"></script>

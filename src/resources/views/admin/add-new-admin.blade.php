@@ -17,7 +17,18 @@
             管理者の作成
         </div>
         <div class="adminContents__content">
-
+            @error('admin')
+            <p>{{$errors->first('admin')}}</p>
+            @enderror
+            @error('user_name')
+            <p>{{$errors->first('user_name')}}</p>
+            @enderror
+            @error('email')
+            <p>{{$errors->first('email')}}</p>
+            @enderror
+            @error('password')
+            <p>{{$errors->first('password')}}</p>
+            @enderror
             <form class="form__wrapper" action="{{ route('addNewAdmin') }}" method="POST">
                 @csrf
                 <div class="form">
@@ -38,17 +49,9 @@
                         <input class="form__item--control" type="password" name="password" value="{{ old('password') }}" placeholder="パスワード" />
                     </div>
 
-                    <!-- <input type="hidden" name="email_verified_at" value="{{ now() }}"> -->
-
-                    <!-- @if(session('message'))
-                    <div class="form__submit">
-                        {{ session('message') }}
-                    </div>
-                    @else -->
                     <div class="form__submit">
                         <button type="submit">登録</button>
                     </div>
-                    <!-- @endif -->
 
                 </div>
 

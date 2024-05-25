@@ -46,8 +46,11 @@ cursor: pointer;
 }
 
 .form__switch {
-color: #0073cc;
 margin-top: 20px;
+}
+
+.form__switch a{
+color: #0073cc;
 cursor: pointer;
 font-weight: bold;
 }

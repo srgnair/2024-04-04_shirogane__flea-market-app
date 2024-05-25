@@ -12,9 +12,21 @@
         <div class="profile-change__title">
             プロフィール設定
         </div>
-        @if (count($errors) > 0)
-        <p>内容を確認してください</p>
-        @endif
+        @error('img')
+        <p>{{$errors->first('img')}}</p>
+        @enderror
+        @error('user_name')
+        <p>{{$errors->first('user_name')}}</p>
+        @enderror
+        @error('post_code')
+        <p>{{$errors->first('post_code')}}</p>
+        @enderror
+        @error('address')
+        <p>{{$errors->first('address')}}</p>
+        @enderror
+        @error('building_name')
+        <p>{{$errors->first('building_name')}}</p>
+        @enderror
         <div class="profile-change__form">
             <div class="profile-change__form--img">
                 <!-- <div class="form__img--img">

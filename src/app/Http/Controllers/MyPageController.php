@@ -51,6 +51,7 @@ class MyPageController extends Controller
         $user = Auth::user();
 
         $purchasedItems = Transaction::where('buyer_id', $user->id)
+            ->where('transaction_type', '!=', 'listed')
             ->with('item')
             ->orderBy('created_at', 'asc')
             ->get();
