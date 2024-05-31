@@ -5,8 +5,12 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 <script src="https://kit.fontawesome.com/ada21263c2.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/like.js') }}"></script>
+
 @endsection
 @section('content')
+
 
 <!-- AuthIdがseller_idでかつ表示中アイテムのtransaction_typeがpurchasedの場合にボタンを表示 -->
 
@@ -81,31 +85,31 @@
             <div class="detail__item-info--icon-wrapper">
                 <div class="detail__item-info--icon">
                     <div class="detail__item-info--star">
-
                         @if(Auth::check() && Auth::user()->is_like($item->id))
-                        <form action="{{ route('deleteLike', ['item_id' => $item->id] ) }}" method="POST" class="mb-4">
+                        <form action="{{ route('deleteLike', ['item_id' => $item->id] ) }}" method="POST" class="like-form mb-4">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="item_id" value="{{$item->id}}">
-                            <button type="submit">
-                                <i class="fa-regular fa-star fa-xl" style="color: #ff5555;"></i>
+                            <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+                            <button type="button" class="like-button">
+                                <i class="fa fa-star fa-xl" style="color: #ff5555;"></i>
                             </button>
-                            <div class=" detail__item-info--number">{{ $likes->count() }}
-                            </div>
+                            <div class="detail__item-info--number">{{ $likes->count() }}</div>
                         </form>
                         @else
-                        <form action="{{ route('like', ['item_id' => $item->id])  }}" method="POST" class="mb-4">
+                        <form action="{{ route('like', ['item_id' => $item->id]) }}" method="POST" class="like-form mb-4">
                             @csrf
                             <input type="hidden" name="item_id" value="{{$item->id}}">
-                            <button type="submit">
-                                <i class="fa-regular fa-star fa-xl"></i>
+                            <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+                            <button type="button" class="like-button">
+                                <i class="fa fa-star-o fa-xl"></i>
                             </button>
-                            <div class=" detail__item-info--number">{{ $likes->count() }}
-                            </div>
+                            <div class="detail__item-info--number">{{ $likes->count() }}</div>
                         </form>
                         @endif
                     </div>
                 </div>
+
                 <div class="detail__item-info--icon">
                     <form action="{{ route('commentView', ['item_id' => $item->id])  }}" method="GET" class="mb-4">
                         @csrf
@@ -171,4 +175,14 @@
     </div>
 
 </div>
+
+<script>
+    // Bladeテンプレート内でルート名をJavaScriptに渡す
+    const routes = {
+        like: <?php echo json_encode(route('like', ['item_id' => 'ITEM_ID_PLACEHOLDER'])); ?>,
+        deleteLike: <?php echo json_encode(route('deleteLike', ['item_id' => 'ITEM_ID_PLACEHOLDER'])); ?>
+    };
+</script>
+
+
 @endsection

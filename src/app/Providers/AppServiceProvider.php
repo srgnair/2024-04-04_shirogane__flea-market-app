@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
+use SocialiteProviders\Line\LineExtendSocialite;
+use Illuminate\Support\Facades\Log;
+use SocialiteProviders\Line\Provider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->make('events')->listen(SocialiteWasCalled::class, function (SocialiteWasCalled $event) {
+            $event->extendSocialite('line', Provider::class);
+        });
     }
 }

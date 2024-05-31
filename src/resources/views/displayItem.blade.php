@@ -7,18 +7,6 @@
 @endsection
 @section('content')
 <div class="list-item__container">
-    <!-- @if (count($errors) > 0)
-    <p>内容を確認してください</p>
-    @endif -->
-    <!-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif -->
     <div class="form__submit">
         {{ session('message') }}
     </div>
@@ -37,15 +25,12 @@
                 @enderror
                 <div class="form__item--border">
                     <div class="form__image--select-button">
-                        <input type="file" id="fileElem" multiple accept="image/*" style="display:none" name="image" />
+                        <input type="file" class="fileElem" onchange="onChangeFileInput(this)" id="fileElem" multiple accept="image/*" style="display:none" name="image" />
                         <button id="fileSelect" type="button">画像を選択する</button>
+                        <div id="fileList"></div>
                     </div>
-                    <script>
-                        document.getElementById('fileSelect').addEventListener('click', function() {
-                            document.getElementById('fileElem').click();
-                        });
-                    </script>
                 </div>
+                <script src="{{ asset('js/sendImg.js') }}"></script>
             </div>
             <div class="list-item__form">
                 <div class="form__title">商品の詳細</div>

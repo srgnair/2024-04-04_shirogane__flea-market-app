@@ -4,6 +4,7 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/profileChange.css') }}">
+<script src="{{ asset('js/sendImg.js') }}"></script>
 @endsection
 @section('content')
 <div class="profile-change">
@@ -39,16 +40,16 @@
                 <div class="form__img--img">
                     <img id="thumbnail" accept="image/*" src="{{ Auth::check() && Auth::user()->img !== null ? asset($userProfile->img) : asset('img/sampleUserImage.png') }}" alt="イメージ画像">
                 </div>
-
                 <div class="form__img--select-button">
                     <!-- <label for="img">商品画像</label> -->
                     <div class="form__item--border">
                         <!-- <div class="form__image--select-button">
                             <input class="form__item--control" type="file" name="img">
                         </div> -->
-                        <input type="file" onchange="onChangeFileInput(this)" id="fileElem" multiple accept="image/*" style="display:none" name="img" />
+                        <input type="file" class="fileElem" onchange="onChangeFileInput(this)" id="fileElem" multiple accept="image/*" style="display:none" name="img" />
                         <button id="fileSelect" type="button">画像を選択する</button>
                         <script src="{{ asset('/js/thumbnail.js') }}"></script>
+                        <div id="fileList"></div>
                     </div>
                 </div>
             </div>

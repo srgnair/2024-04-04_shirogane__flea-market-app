@@ -44,6 +44,18 @@
                 </div>
 
                 <div class="google">
+                    <a href="{{ route('login.google') }}">
+                        <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
+                    </a>
+                </div>
+
+                <div class="line">
+                    <a href="{{ route('login.line') }}">
+                        <img src="{{ asset('img/btn_login_base.png') }}">
+                    </a>
+                </div>
+
+                <!-- <div class="google">
                     <button class="gsi-material-button">
                         <div class="gsi-material-button-state"></div>
                         <div class="gsi-material-button-content-wrapper">
@@ -60,7 +72,7 @@
                             <span style="display: none;">Sign in with Google</span>
                         </div>
                     </button>
-                </div>
+                </div> -->
 
                 <div class="form__switch">
                     <a href="{{ route('registerView') }}">

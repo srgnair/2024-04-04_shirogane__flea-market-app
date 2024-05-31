@@ -20,7 +20,12 @@
 <div class="main__content">
     <div class="main__content--cards">
         @foreach($likeItems as $likeItem)
-        <div class="card">
+        <div @if($likeItem->transaction && $likeItem->transaction->transaction_type === 'listed')
+            class="card"
+            @else
+            class="card__sold"
+            @endif
+            >
             <a href="{{ route('detailView', ['id' => $likeItem->item->id]) }}" class="card__link">
                 <div class="card__image-container">
                     <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">

@@ -17,6 +17,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShippingChangeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\LineLoginController;
 
 // Route::get('/', function () {
 // return view('welcome');
@@ -77,7 +79,6 @@ Route::middleware('web')->group(
 
         Route::post('/purchase/update_payment_method/{item_id}', [PurchaseController::class, 'updatePaymentMethod'])->name('updatePaymentMethod');
 
-
         Route::get('/shipping_change/{item_id}', [ShippingChangeController::class, 'shippingChangeView'])->name('shippingChangeView');
         Route::post('/shipping_change/{item_id}', [ShippingChangeController::class, 'shippingChange'])->name('shippingChange');
 
@@ -103,5 +104,17 @@ Route::middleware('web')->group(
             Route::get('/create', [PaymentController::class, 'create'])->name('create');
             Route::post('/store', [PaymentController::class, 'store'])->name('store');
         });
+
+        // Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
+        // Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
+
+        // Route::get('/auth/line/redirect', [LineLoginController::class, 'redirectToLine'])->name('login.line.redirect');
+        // Route::get('/auth/line/callback', [LineLoginController::class, 'handleLineCallback'])->name('login.line.callback');   
+
+        Route::get('login/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
+        Route::get('login/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
+
+        Route::get('login/line', [LineLoginController::class, 'redirectToLine'])->name('login.line');
+        Route::get('login/line/callback', [LineLoginController::class, 'handleLineCallback'])->name('login.line.callback');
     }
 );

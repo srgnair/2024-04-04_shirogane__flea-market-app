@@ -71,6 +71,8 @@
     @else
     <div class="main__content--cards">
         @foreach($results as $item)
+        @foreach($itemImages as $image)
+        @if ($image->item_id == $item->id)
         <div @if($item->transaction && $item->transaction->transaction_type === 'listed')
             class="card"
             @else
@@ -79,17 +81,16 @@
             >
             <a href="{{ route('detailView', ['id' => $item->id]) }}" class="card__link">
                 <div class="card__image-container">
+
+
                     <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
-                    @foreach($itemImages as $image)
-                    @if ($image->item_id == $item->id)
                     <img class="card__item-image" src="{{ asset($image->image) }}" alt="イメージ画像">
-                    @break
-                    @endif
-                    @endforeach
+
                 </div>
             </a>
         </div>
-
+        @endif
+        @endforeach
         @endforeach
     </div>
     @endif

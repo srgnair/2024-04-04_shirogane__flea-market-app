@@ -13,24 +13,30 @@ class LikeController extends Controller
         $user_id = Auth::id();
         $item_id = $request->input('item_id');
 
-        $like = [
+        Like::create([
             'user_id' => $user_id,
             'item_id' => $item_id,
-        ];
+        ]);
 
-        Like::create($like);
+        $likes_count = Like::where('item_id', $item_id)->count();
 
-        return back();
+        return response()->json(['success' => true, 'liked' => true, 'likes_count' => $likes_count]);
     }
 
     public function deleteLike($item_id)
     {
-        $userId = Auth::id();
+        $user_id = Auth::id();
 
-        Like::where('user_id', $userId)
+        $like = Like::where('user_id', $user_id)
             ->where('item_id', $item_id)
-            ->delete();
+            ->first();
 
-        return back();
+        if ($like) {
+            $like->delete();
+            $likes_count = Like::where('item_id', $item_id)->count();
+            return response()->json(['success' => true, 'liked' => false, 'likes_count' => $likes_count]);
+        }
+
+        return response()->json(['success' => false, 'liked' => true]);
     }
 }

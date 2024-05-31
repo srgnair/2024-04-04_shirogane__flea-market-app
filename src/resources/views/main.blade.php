@@ -4,6 +4,7 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+<link rel="stylesheet" href="{{ secure_asset('css/main.css') }}">
 @endsection
 @section('content')
 <div class="main__menu">

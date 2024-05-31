@@ -78,7 +78,8 @@ class User extends Authenticatable
         'address',
         'building_name',
         'img',
-        'role'
+        'role',
+        'line_id',
     ];
 
     /**
@@ -89,6 +90,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'line_id'
     ];
 
     /**

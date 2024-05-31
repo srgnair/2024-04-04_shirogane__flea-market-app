@@ -34,32 +34,12 @@ class DetailPageController extends Controller
 
     public function updateShippingStatusCurrently(Request $request, $id)
     {
-        //商品が購入されたときにtransactionテーブルのtranaction_typeカラムを変更する
-        //listed　出品中、purchased 配送前、currentlyShipping 配送中、completion 配送済み
-        //AuthIdがseller_idでかつ表示中アイテムのtransaction_typeがpurchasedの場合にボタンを表示
-        //「発送しました」ボタンを押すと、currentlyShippingに変化
-        //同時にリマインドメールを購入者に送信する
-
         $transaction = Transaction::where('item_id', $id)->first();
 
         $recipientEmail = $transaction->buyer->email;
 
         $recipientName = $transaction->buyer->user_name;
         $itemName = $transaction->itemName->item_name;
-
-        // $notificationShippingEmail = new NotificationShipping($recipientName, $itemName);
-
-        // Mail::to($recipientEmail)->send($notificationShippingEmail);
-
-        // if (count(Mail::failures()) > 0) {
-        //     $message = 'メール送信に失敗しました';
-
-        //     return back()->withErrors($message);
-        // } else {
-        //     $message = 'メールを送信しました';
-
-        //     return redirect()->route('sendEmailView')->with(compact('message'));
-        // }
 
         $notificationShippingEmail = new NotificationShipping($recipientName, $itemName);
 

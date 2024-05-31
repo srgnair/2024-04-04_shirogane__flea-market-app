@@ -6,6 +6,9 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
 use App\Http\Requests\ReviewRequest;
+use App\Mail\ReviewFromBuyerCompleted;
+use App\Mail\ReviewFromSellerCompleted;
+use Illuminate\Support\Facades\Mail;
 
 class ReviewController extends Controller
 {
@@ -46,11 +49,6 @@ class ReviewController extends Controller
             return redirect()->back()->with('error', 'この取引に対しては既にレビューを投稿済みです');
         }
 
-        // $user_idが$transaction->seller_idと一致なら、$review['reviewee_id']には$transaction->buyer_idを入れる
-        // if ($user_id == $transaction->seller_id) {
-        //     $reviewee_id = $transaction->buyer_id;
-        // }
-        // $user_idが$transaction->buyer_idと一致なら、$review['reviewee_id']には$transaction->seller_idを入れる
         if ($user_id == $transaction->buyer_id) {
             $reviewee_id = $transaction->seller_id;
         }
@@ -72,6 +70,13 @@ class ReviewController extends Controller
         $transaction->transaction_type = 'waiting_review_seller';
         $transaction->save();
 
+        $recipientEmail = $transaction->seller->email;
+        $recipientName = $transaction->seller->user_name;
+        $itemName = $transaction->itemName->item_name;
+        $reviewFromBuyerCompletedEmail = new ReviewFromBuyerCompleted($recipientName, $itemName);
+
+        Mail::to($recipientEmail)->send($reviewFromBuyerCompletedEmail);
+
         // 'id'パラメータを渡してリダイレクト
         return redirect()->route('detailView', ['id' => $id])->with('message', '登録されました！');
     }
@@ -88,27 +93,9 @@ class ReviewController extends Controller
             return redirect()->back()->with('error', '取引が見つかりませんでした');
         }
 
-        // 同じ取引に対して既にレビューが投稿されているかを確認
-        // $existingReview = Review::where(
-        //     'transaction_id',
-        //     $transaction->id
-        // )
-        //     ->where('reviewer_id', $user_id)
-        //     ->first();
-
-        // if ($existingReview && $user_id == $transaction->seller_id) {
-        //     return redirect()->back()->with('error', 'この取引に対しては既にレビューを投稿済みです');
-        // }
-
-        // $user_idが$transaction->seller_idと一致なら、$review['reviewee_id']には$transaction->buyer_idを入れる
         if ($user_id == $transaction->seller_id) {
             $reviewee_id = $transaction->buyer_id;
         }
-        // $user_idが$transaction->buyer_idと一致なら、$review['reviewee_id']には$transaction->seller_idを入れる
-        // if ($user_id == $transaction->buyer_id) {
-        //     $reviewee_id = $transaction->seller_id;
-        // }
-        // それ以外の場合はエラーを返す
         else {
             return redirect()->back()->with('error', 'この取引のレビューを投稿する権限がありません');
         }
@@ -125,6 +112,13 @@ class ReviewController extends Controller
         // transaction_typeを変更
         $transaction->transaction_type = 'complete';
         $transaction->save();
+
+        $recipientEmail = $transaction->seller->email;
+        $recipientName = $transaction->seller->user_name;
+        $itemName = $transaction->itemName->item_name;
+        $reviewFromSellerCompletedEmail = new ReviewFromSellerCompleted($recipientName, $itemName);
+
+        Mail::to($recipientEmail)->send($reviewFromSellerCompletedEmail);
 
         // 'id'パラメータを渡してリダイレクト
         return redirect()->route('detailView', ['id' => $id])->with('message', '登録されました！');

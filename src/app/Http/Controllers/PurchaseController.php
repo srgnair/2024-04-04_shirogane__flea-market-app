@@ -11,6 +11,8 @@ use Exception;
 use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PurchaseCompleted;
 
 class PurchaseController extends Controller
 {
@@ -111,6 +113,17 @@ class PurchaseController extends Controller
 
             $item->buyer_id = Auth::user()->id;
             $item->save();
+
+            //メール送信メソッド
+            $transaction = Transaction::where('item_id', $item_id)->first();
+
+            $recipientEmail = $transaction->seller->email;
+            $recipientName = $transaction->seller->user_name;
+            $itemName = $transaction->itemName->item_name;
+
+            $purchaseCompletedEmail = new PurchaseCompleted($recipientName, $itemName);
+
+            Mail::to($recipientEmail)->send($purchaseCompletedEmail);
 
             return redirect()->route('confirmPurchaseView', ['item_id' => $item_id])->with('message', '購入が完了しました。');
         } else {
