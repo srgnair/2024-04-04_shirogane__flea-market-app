@@ -75,28 +75,70 @@ coachtechブランドのアイテムを出品するために作成しました�
 
 ## 環境構築
 
-#### ディレクトリ構成
-atte  
-├── docker  
-│&emsp;&emsp;├── mysql  
-│&emsp;&emsp;│&emsp;&emsp;├── data  
-│&emsp;&emsp;│&emsp;&emsp;└── my.cnf  
-│&emsp;&emsp;├── nginx  
-│&emsp;&emsp;│&emsp;&emsp;└── default.conf  
-│&emsp;&emsp;└── php  
-│&emsp;&emsp;&emsp;&emsp;&emsp;├── Dockerfile  
-│&emsp;&emsp;&emsp;&emsp;&emsp;└── php.ini  
-├── docker-compose.yml  
-└── src  
+## リポジトリのクローン
 
-#### パッケージのインストール
-$ composer -v
+まず、GitHubからリポジトリをクローンします。
 
-#### プロジェクトの作成
-$ composer create-project "laravel/laravel=8.*" . --prefer-dist
+```bash
+git clone https://github.com/srgnair/2024-04-04_shirogane__flea-market-app.git
+cd 2024-04-04_shirogane__flea-market-app
 
-下記のローカル環境にアクセス
-http://localhost/
+依存パッケージのインストール
+次に、Composerを使用して依存パッケージをインストールします。
+
+composer install
+
+環境設定ファイルの作成
+.env.example ファイルをコピーして .env ファイルを作成します。
+
+cp .env.example .env
+
+アプリケーションキーを生成します。
+php artisan key:generate
+
+データベースの設定
+.env ファイルを開き、データベース接続情報を設定します。
+足りない部分を追加してください。
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=laravel_db
+DB_USERNAME=laravel_user
+DB_PASSWORD=laravel_pass
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+
+LINE_CLIENT_ID=
+LINE_CLIENT_SECRET=
+LINE_REDIRECT_URI=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=
+
+マイグレーションの実行
+データベースのテーブルを作成するためにマイグレーションを実行します。
+
+php artisan migrate
+
+ローカルサーバの起動
+アプリケーションを起動します。
+
+php artisan serve
+
+これで、ブラウザから http://localhost にアクセスしてアプリケーションを確認できます。
+
 
 ## ほかに記載すること
 全ての機能は完成できませんでした。
