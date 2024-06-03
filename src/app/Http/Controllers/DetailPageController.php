@@ -8,7 +8,6 @@ use App\Models\ItemCategory;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Transaction;
-use App\Mail\NotificationEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationShipping;
 use App\Mail\NotificationShippingComplete;
@@ -18,9 +17,6 @@ class DetailPageController extends Controller
 {
     public function detailView($item_id)
     {
-        //コメントの数
-        // 商品IDに基づいて商品情報を取得する
-
         $item = Item::find($item_id);
         $itemCategories = ItemCategory::where('item_id', $item_id)->get();
         $itemImages = ItemImage::where('item_id', $item_id)->get();
@@ -46,9 +42,7 @@ class DetailPageController extends Controller
         try {
             Mail::to($recipientEmail)->send($notificationShippingEmail);
 
-            // メール送信後にテーブルのカラムを変更する処理
             if ($transaction) {
-                // transaction_typeを「購入済み」に更新
                 $transaction->transaction_type = 'waiting_arrival';
                 $transaction->save();
 
@@ -75,9 +69,7 @@ class DetailPageController extends Controller
         try {
             Mail::to($recipientEmail)->send($notificationShippingCompleteEmail);
 
-            // メール送信後にテーブルのカラムを変更する処理
             if ($transaction) {
-                // transaction_typeを「購入済み」に更新
                 $transaction->transaction_type = 'waiting_review_buyer';
                 $transaction->save();
 

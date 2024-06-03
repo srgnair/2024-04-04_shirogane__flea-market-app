@@ -18,13 +18,11 @@ class Review extends Model
         'comment',
     ];
 
-    // 評価を行ったユーザ
     public function reviewer()
     {
         return $this->belongsTo(User::class, 'reviewer_id');
     }
 
-    // 評価されたユーザ
     public function reviewee()
     {
         return $this->belongsTo(User::class, 'reviewee_id');

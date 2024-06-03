@@ -6,11 +6,8 @@ use App\Models\Item;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Exception;
-use Stripe\Stripe;
 use Stripe\Customer;
-use Stripe\PaymentIntent;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseCompleted;
 
@@ -18,25 +15,15 @@ class PurchaseController extends Controller
 {
     public function confirmPurchaseView($item_id)
     {
-        // 商品画像
-        // 商品名
-        // 支払い方法
-        // 配送先住所
-        //transaction
-
-        //送信されたコメントを表示させる
         $user = Auth::user();
 
         if (!$user) {
             return redirect()->route('loginView')->with('error', 'ログインしてください');
         }
 
-        // $comments = $user->comments()->with('item')->get();
-        // $comments = Comment::where('item_id', $item_id)->with('user')->get();
-
         $item = Item::find($item_id);
         if (!$item) {
-            return abort(404); // アイテムが存在しない場合は404エラーを返す
+            return abort(404);
         }
 
         $itemImages = $item->itemImages;
@@ -46,10 +33,8 @@ class PurchaseController extends Controller
         return view('confirmPurchase', compact('user', 'item', 'itemImages', 'item_id', 'transaction'))->with('stripe_public_key', config('stripe.stripe_public_key'));
     }
 
-    // 商品名
     public function purchase(Request $request, $item_id)
     {
-
         $item = Item::find($item_id);
 
         if (!$item) {
@@ -57,7 +42,6 @@ class PurchaseController extends Controller
         }
 
         $transaction = Transaction::where('item_id', $item_id)->first();
-
 
         if ($transaction && $transaction->payment_method === 'card') {
             \Stripe\Stripe::setApiKey(config('services.stripe.secret.key'));
@@ -83,13 +67,13 @@ class PurchaseController extends Controller
                 $customer_id = $stripeCustomer->id;
 
                 $paymentIntent = \Stripe\PaymentIntent::create([
-                    'customer' => $customer_id, // 顧客のStripe ID
+                    'customer' => $customer_id,
                     'payment_method_types' => ['customer_balance'],
                     'amount' => $item->price,
                     'currency' => 'jpy',
                     'payment_method_options' => [
                         'customer_balance' => [
-                            'funding_type' => 'bank_transfer', // 追加された行
+                            'funding_type' => 'bank_transfer',
                             'bank_transfer' => [
                                 'type' => 'jp_bank_transfer',
                             ],
@@ -106,7 +90,6 @@ class PurchaseController extends Controller
         }
 
         if ($transaction) {
-            // $transaction->transaction_type = 'purchased';
             $transaction->amount = $item->price;
             $transaction->buyer_id = Auth::user()->id;
             $transaction->save();
@@ -114,7 +97,6 @@ class PurchaseController extends Controller
             $item->buyer_id = Auth::user()->id;
             $item->save();
 
-            //メール送信メソッド
             $transaction = Transaction::where('item_id', $item_id)->first();
 
             $recipientEmail = $transaction->seller->email;
@@ -140,7 +122,6 @@ class PurchaseController extends Controller
 
     public function updatePaymentMethod($item_id, Request $request)
     {
-
         $user = Auth::user();
 
         if (!$user) {
@@ -149,7 +130,7 @@ class PurchaseController extends Controller
 
         $item = Item::find($item_id);
         if (!$item) {
-            return abort(404); // アイテムが存在しない場合は404エラーを返す
+            return abort(404);
         }
 
         $itemImages = $item->itemImages;
@@ -157,11 +138,11 @@ class PurchaseController extends Controller
         $transaction = $item->transaction;
 
         if (!$transaction) {
-            return abort(404); // トランザクションが存在しない場合は404エラーを返す
+            return abort(404);
         }
 
         $transaction->payment_method = $request->input('payment_method');
-        $transaction->save(); // トランザクションモデルを保存
+        $transaction->save();
 
         return redirect()->route('confirmPurchaseView', compact('user', 'item', 'itemImages', 'item_id', 'transaction'));
     }

@@ -23,11 +23,7 @@
                 <form action="{{ route('mainView') }}" method="GET">
                     @csrf
                     <div class="header__search-function">
-
                         <input class="header__search-function--input" type="text" name="keyword" value="{{ session('search_keyword') }}" placeholder=" なにをお探しですか？">
-
-                        <!-- <button type="submit">検索</button> -->
-
                     </div>
 
                 </form>

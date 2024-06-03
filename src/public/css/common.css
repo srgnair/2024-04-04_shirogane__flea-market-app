@@ -104,7 +104,6 @@ main {
 width: 800px;
 margin: 0 auto;
 text-align: center;
-/* padding-top: 50px; */
 }
 
 a {
@@ -129,7 +128,3 @@ padding-inline-start: 0px;
     justify-content: center;
     width: 100%;
 }
-
-/* .img img{
-    width: 100%;
-} */

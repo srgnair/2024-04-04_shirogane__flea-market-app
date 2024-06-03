@@ -12,12 +12,11 @@ width: 100%;
 
 .detail__img {
    text-align: left;
-    /* width: 30%; */
     margin: 0 50px;
     border-radius: 3px;
     position: relative;
-    width: 350px; /* カードの幅 */
-    height: 350px; /* カードの高さ */
+    width: 350px;
+    height: 350px;
 }
 
 .detail__img img{
@@ -99,10 +98,6 @@ padding-top:10px;
 margin-right: 20px;
 }
 
-/* .category__title{
-margin-bottom: 20px;
-} */
-
 .category__item,
 .condition__item {
 margin-left: 30px;
@@ -137,7 +132,7 @@ margin-bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 画像の切り取り方法を指定 */
+    object-fit: cover;
 }
 
 .card__item-image {
@@ -145,13 +140,13 @@ margin-bottom: 0;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 80%; /* 商品画像の最大幅 */
-    max-height: 80%; /* 商品画像の最大高さ */
+    max-width: 80%;
+    max-height: 80%;
     width: auto;
     height: auto;
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* 画像が切れることなくコンテナー内に収まるように調整 */
+    object-fit: contain;
 }
 
 .message__update-status{
@@ -160,12 +155,11 @@ margin-bottom: 0;
 
 .card__sold {
     text-align: left;
-    /* width: 15%; */
     margin: 15px;
     border-radius: 3px;
     position: relative;
-    width: 350px; /* カードの幅 */
-    height: 350px; /* カードの高さ */
+    width: 350px;
+    height: 350px;
 }
 
 .card img,
@@ -184,7 +178,7 @@ margin-bottom: 0;
     border-style: solid;
     border-width: 50px 50px 0 0;
     border-color: #f00 transparent transparent transparent;
-    z-index: 2; /* 新たに追加 */
+    z-index: 2;
 }
 
 .card__sold:after {

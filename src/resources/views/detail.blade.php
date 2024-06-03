@@ -7,21 +7,16 @@
 <script src="https://kit.fontawesome.com/ada21263c2.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js/like.js') }}"></script>
-
 @endsection
 @section('content')
-
-
-<!-- AuthIdがseller_idでかつ表示中アイテムのtransaction_typeがpurchasedの場合にボタンを表示 -->
 
 @if($item->transaction && $item->transaction->payment_method === 'customer_balance' && $item->transaction->transaction_type === 'waiting_payment' && $item->transaction->buyer_id === Auth::user()->id )
 <div>
     購入を受け付けました。以下の口座に入金してください。
     <br>
-    ×××
+    （こちらに口座情報を表示）
     <br>
     <button>入金完了</button>
-    <!-- 振込完了ボタンを押すとステータスが変わる -->
 </div>
 @elseif(Auth::user()->id == $item->seller_id && $item->transaction->transaction_type == 'waiting_shipping')
 <div class="message__update-status">
@@ -59,8 +54,6 @@
 
     <div class="detail__img">
         @foreach($itemImages as $itemImage)
-        <!-- <img src="{{ asset('img/itemImage.png') }}" alt="イメージ画像"> -->
-        <!-- <div class="card__image-container"> -->
         <div @if($item->transaction->transaction_type === 'listed') class="card" @else class="card__sold" @endif>
             <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
             <img class="card__item-image" src="{{ asset($itemImage->image) }}" alt="イメージ画像">
@@ -113,7 +106,6 @@
                 <div class="detail__item-info--icon">
                     <form action="{{ route('commentView', ['item_id' => $item->id])  }}" method="GET" class="mb-4">
                         @csrf
-                        <!-- <input type="hidden" name="item_id" value="{{$item->id}}"> -->
                         <button type="submit">
                             <i class="fa-regular fa-comment fa-xl"></i>
                         </button>
@@ -123,8 +115,6 @@
                 </div>
             </div>
             <div class="detail__item-info--button-to-buy">
-                <!-- 購入確認ページへ遷移 -->
-                <!-- item_idを渡す -->
                 @if($item->transaction->transaction_type === 'listed')
                 <a href="{{ route('confirmPurchaseView', ['item_id' => $item->id]) }}">
                     <button>

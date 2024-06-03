@@ -11,7 +11,7 @@
     <ul>
         <li class="main__menu--mylist-search">おすすめ</li>
         <li>
-            <a href="{{ route('mainMyDisplayItemsView') }}">
+            <a href="{{ route('mainMyLikeItemsView') }}">
                 マイリスト
             </a>
         </li>

@@ -29,10 +29,10 @@ class Item extends Model
         return $this->hasMany(ItemCategory::class);
     }
 
-    // public function order()
-    // {
-    // return $this->belongsTo(User::class);
-    // }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     public function transaction()
     {

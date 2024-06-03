@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\ItemImage;
 use App\Models\ItemCategory;
@@ -20,14 +19,9 @@ class DisplayController extends Controller
 
     public function displayItem(DisplayItemRequest $request)
     {
-        //item、itemCategory、itemImageはテーブルが別
-        //transactionテーブルをcreateする
-
-        // リクエストの内容をログに出力
         Log::info($request->all());
 
         $user_id = Auth::id();
-        // $category_id =  $request->input('category');
 
         $newItem = new Item();
         $newItem->item_name = $request->input('item_name');
@@ -38,7 +32,6 @@ class DisplayController extends Controller
         $newItem->seller_id = $user_id;
         $newItem->save();
 
-        // 新しいアイテムのIDを取得
         $item_id = $newItem->id;
 
         $newItemCategory = new ItemCategory();
@@ -47,7 +40,6 @@ class DisplayController extends Controller
         $newItemCategory->item_id = $item_id;
         $newItemCategory->save();
 
-        // 新しいアイテムのカテゴリーIDを設定する
         $newItem->category_id = $newItemCategory->id;
         $newItem->save();
 
@@ -61,12 +53,10 @@ class DisplayController extends Controller
 
         $newItemTransaction = new Transaction();
         $newItemTransaction->seller_id = $user_id;
-        // $newItemTransaction->buyer_id = $user_id;
         $newItemTransaction->item_id = $item_id;
         $newItemTransaction->transaction_type = 'listed';
         $newItemTransaction->save();
 
-        // データベースに新しいアイテムを作成
         return redirect()->route('displayItem')->with('message', '登録されました！');
     }
 }

@@ -25,7 +25,6 @@ width: 5%;
 font-weight: bold;
 font-size: 18px;
 text-align: center;
-/* line-height: 36px; */
 margin: 0 200px 0 20px;
 }
 
@@ -92,15 +91,9 @@ margin-left: 60px;
 
 .mypage__content--card {
     text-align: left;
-    /* width: 30%; */
     margin: 10px;
     border-radius: 3px;
 }
-
-/* .mypage__content--card img{
-    width: 100%;
-} */
-
 
 .mypage__content--cards {
     font-weight: bold;
@@ -110,17 +103,15 @@ margin-left: 60px;
     flex-wrap: wrap;
     padding: 0 0 0 30px;
     width: 100%;
-    /* justify-content: center; */
 }
 
 .mypage__content--card {
     text-align: center;
-    /* width: 15%; */
     margin: 20px;
     border-radius: 3px;
     position: relative;
-    width: 200px; /* カードの幅 */
-    height: 200px; /* カードの高さ */
+    width: 200px;
+    height: 200px;
 }
 
 .mypage__content--card img{
@@ -130,12 +121,11 @@ margin-left: 60px;
 .card,
 .card__sold {
     text-align: left;
-    /* width: 15%; */
     margin: 15px;
     border-radius: 3px;
     position: relative;
-    width: 200px; /* カードの幅 */
-    height: 200px; /* カードの高さ */
+    width: 200px;
+    height: 200px;
 }
 
 .card img,
@@ -161,7 +151,7 @@ margin-left: 60px;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 画像の切り取り方法を指定 */
+    object-fit: cover;
 }
 
 .card__item-image {
@@ -169,21 +159,19 @@ margin-left: 60px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 80%; /* 商品画像の最大幅 */
-    max-height: 80%; /* 商品画像の最大高さ */
+    max-width: 80%;
+    max-height: 80%;
     width: auto;
     height: auto;
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* 画像が切れることなくコンテナー内に収まるように調整 */
+    object-fit: contain;
 }
 
-/* admin.cssに移動 */
 li {
 list-style: none;
 padding-bottom: 10px;
 }
-
 
 .card__sold:before {
     position: absolute;
@@ -195,7 +183,7 @@ padding-bottom: 10px;
     border-style: solid;
     border-width: 50px 50px 0 0;
     border-color: #f00 transparent transparent transparent;
-    z-index: 2; /* 新たに追加 */
+    z-index: 2;
 }
 
 .card__sold:after {

@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -12,8 +11,8 @@ class NotificationEmail extends Mailable
     use Queueable, SerializesModels;
 
     
-    public $subject; // アクセスレベルを public に変更
-    public $body; // アクセスレベルを public に変更
+    public $subject;
+    public $body;
 
     /**
      * Create a new message instance.

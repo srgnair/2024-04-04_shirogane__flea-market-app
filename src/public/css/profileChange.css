@@ -38,7 +38,6 @@ margin: auto 0px;
 .form__img--select-button button {
 border: 3px solid #ff5555;
 outline: none;
-/* margin-top: 40px; */
 padding: 3px 20px 3px;
 background: white;
 display: inline-block;
@@ -118,6 +117,6 @@ font-weight: bold;
 
 .form__item--control{ 
   text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }

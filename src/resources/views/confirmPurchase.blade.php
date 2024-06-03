@@ -17,8 +17,7 @@
 <div>
     購入を受け付けました。以下の口座に入金してください。
     <br>
-    ×××
-    <!-- 振込完了ボタンを押すとステータスが変わる -->
+    (口座情報をこちらに表示)
 </div>
 @endif
 
@@ -100,12 +99,11 @@
                     </div>
 
                     <div class="container__shipping-address--address">
-                        <!-- if分岐　$user->deliveryAddress()が存在したら -->
+                        <!-- エラー確認 -->
                         @if( $user->deliveryAddresses()->exists() )
                         {{ substr($user->deliveryAddresses()->first()->post_code, 0, 3) . '-' . substr($user->deliveryAddresses()->first()->post_code, 3) }}
                         {{ $user->deliveryAddresses()->first()->address }}
                         {{ $user->deliveryAddresses()->first()->building_name }}
-                        <!-- 登録されていなければ、[配送先を登録してください]と表示する -->
                         @else
                         配送先を登録してください
                         @endif

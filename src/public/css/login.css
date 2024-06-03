@@ -3,19 +3,6 @@ main{
     padding-top: 40px;
 }
 
-sample_color{
-    color: #ff5555;
-    /* ボタンの背景、その他赤いところ */
-    color: #5F5F5F;
-    /* ボーダー */
-    color: #0073cc;
-    /* リンクの文字色 */
-    color: #ff0000;
-    /* おすすめの文字 */
-    color: #d9d9d9;
-    /* タグの背景色 */
-}
-
 .login-form {
 width: 500px;
 margin: 0 auto;

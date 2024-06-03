@@ -89,8 +89,8 @@ cursor: pointer;
 .comment__img {
     border-radius: 3px;
     position: relative;
-    width: 100px; /* カードの幅 */
-    height: 100px; /* カードの高さ */
+    width: 100px;
+    height: 100px;
     margin: 0px 0 30px 20px;
 }
 
@@ -114,8 +114,8 @@ cursor: pointer;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 80%; /* 商品画像の最大幅 */
-    max-height: 80%; /* 商品画像の最大高さ */
+    max-width: 80%;
+    max-height: 80%;
     width: auto;
     height: auto;
     max-width: 100%;

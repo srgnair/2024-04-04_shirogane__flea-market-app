@@ -39,7 +39,6 @@
                     @error('category')
                     <p>{{$errors->first('category')}}</p>
                     @enderror
-                    <!-- <input type="text" name="category" value="{{ old('category') }}" /> -->
                     <select id="selectCategory" name="category" class="form__item--control">
                         <option value="">選択してください</option>
                         <option value="1">ファッション</option>
@@ -54,7 +53,6 @@
                     @error('condition')
                     <p>{{$errors->first('condition')}}</p>
                     @enderror
-                    <!-- <input type="text" name="condition" value="{{ old('condition') }}" /> -->
                     <select id="selectCondition" name="condition" class="form__item--control">
                         <option value="">選択してください</option>
                         <option value="1">新品、未使用</option>

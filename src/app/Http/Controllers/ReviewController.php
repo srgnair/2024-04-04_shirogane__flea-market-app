@@ -19,7 +19,6 @@ class ReviewController extends Controller
         $transaction = Transaction::where('item_id', $id)->first();
 
         if (!$transaction) {
-            // 取引が見つからない場合の処理（例：404エラーページを表示）
             abort(404, 'Transaction not found.');
         }
 
@@ -30,14 +29,12 @@ class ReviewController extends Controller
     {
         $user_id = Auth::id();
 
-        // $idを使ってtransactionテーブルからデータを取得
         $transaction = Transaction::where('item_id', $id)->first();
 
         if (!$transaction) {
             return redirect()->back()->with('error', '取引が見つかりませんでした');
         }
 
-        // 同じ取引に対して既にレビューが投稿されているかを確認
         $existingReview = Review::where(
             'transaction_id',
             $transaction->id
@@ -52,21 +49,17 @@ class ReviewController extends Controller
         if ($user_id == $transaction->buyer_id) {
             $reviewee_id = $transaction->seller_id;
         }
-        // それ以外の場合はエラーを返す
         else {
             return redirect()->back()->with('error', 'この取引のレビューを投稿する権限がありません');
         }
 
-        // リクエストから全ての入力データを取得
         $review = $request->all();
         $review['reviewer_id'] = $user_id;
         $review['reviewee_id'] = $reviewee_id;
         $review['transaction_id'] = $transaction->id;
 
-        // レビューをデータベースに保存
         Review::create($review);
 
-        // transaction_typeを変更
         $transaction->transaction_type = 'waiting_review_seller';
         $transaction->save();
 
@@ -77,15 +70,12 @@ class ReviewController extends Controller
 
         Mail::to($recipientEmail)->send($reviewFromBuyerCompletedEmail);
 
-        // 'id'パラメータを渡してリダイレクト
         return redirect()->route('detailView', ['id' => $id])->with('message', '登録されました！');
     }
 
     public function postReviewSeller(ReviewRequest $request, $id)
     {
         $user_id = Auth::id();
-
-        // $idを使ってtransactionテーブルからデータを取得
 
         $transaction = Transaction::where('item_id', $id)->first();
 
@@ -100,16 +90,13 @@ class ReviewController extends Controller
             return redirect()->back()->with('error', 'この取引のレビューを投稿する権限がありません');
         }
 
-        // リクエストから全ての入力データを取得
         $review = $request->all();
         $review['reviewer_id'] = $user_id;
         $review['reviewee_id'] = $reviewee_id;
         $review['transaction_id'] = $transaction->id;
 
-        // レビューをデータベースに保存
         Review::create($review);
 
-        // transaction_typeを変更
         $transaction->transaction_type = 'complete';
         $transaction->save();
 
@@ -120,7 +107,6 @@ class ReviewController extends Controller
 
         Mail::to($recipientEmail)->send($reviewFromSellerCompletedEmail);
 
-        // 'id'パラメータを渡してリダイレクト
         return redirect()->route('detailView', ['id' => $id])->with('message', '登録されました！');
     }
 }

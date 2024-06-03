@@ -19,10 +19,5 @@ class Comment extends Model
         return $this->belongsTo(Item::class);
     }
 
-    // public function is_like($shop_id)
-    // {
-    //     return $this->likes()->where('shop_id', $shop_id)->exists();
-    // }
-
     protected $fillable = ['user_id', 'item_id','text'];
 }

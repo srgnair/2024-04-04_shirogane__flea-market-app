@@ -17,18 +17,6 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'email' => 'user@user.com',
-                'password' => bcrypt('useruser'),
-                'user_name' => 'user',
-                'post_code' => '1234567',
-                'address' => '神奈川県横浜市',
-                'building_name' => '〇〇マンション1-2-3',
-                'created_at' => now(),
-                'updated_at' => now(),
-                'img' => 'img/grayBack.png',
-                'role' => NULL,
-            ],
-            [
                 'email' => 'usera@user.com',
                 'password' => bcrypt('useruser'),
                 'user_name' => 'usera',
@@ -44,6 +32,18 @@ class UsersTableSeeder extends Seeder
                 'email' => 'userb@user.com',
                 'password' => bcrypt('useruser'),
                 'user_name' => 'userb',
+                'post_code' => '1234567',
+                'address' => '神奈川県横浜市',
+                'building_name' => '〇〇マンション1-2-3',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'img' => 'img/grayBack.png',
+                'role' => NULL,
+            ],
+            [
+                'email' => 'userc@user.com',
+                'password' => bcrypt('useruser'),
+                'user_name' => 'userc',
                 'post_code' => '1234567',
                 'address' => '神奈川県横浜市',
                 'building_name' => '〇〇マンション1-2-3',

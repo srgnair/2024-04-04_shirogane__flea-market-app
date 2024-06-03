@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function onChangeFileInput(input) {
     const fileList = document.getElementById('fileList');
-    fileList.innerHTML = ''; // 既存のリストをクリア
+    fileList.innerHTML = '';
 
     for (let i = 0; i < input.files.length; i++) {
         const listItem = document.createElement('div');

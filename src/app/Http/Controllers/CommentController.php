@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Like;
@@ -13,19 +12,17 @@ class CommentController extends Controller
 {
     public function commentView($item_id)
     {
-        //送信されたコメントを表示させる
         $user = Auth::user();
 
         if (!$user) {
             return redirect()->route('loginView')->with('error', 'ログインするとコメントが見れます');
         }
 
-        // $comments = $user->comments()->with('item')->get();
         $comments = Comment::where('item_id', $item_id)->with('user')->get();
 
         $item = Item::find($item_id);
         if (!$item) {
-            return abort(404); // アイテムが存在しない場合は404エラーを返す
+            return abort(404);
         }
 
         $itemImages = $item->itemImages;
@@ -36,10 +33,6 @@ class CommentController extends Controller
 
     public function comment(CommentRequest $request, $item_id)
     {
-        //コメントを送信する
-        //コメントテーブルをcreateする
-        //user_idとitem_idとtext
-
         $user_id = Auth::id();
 
         $comment = $request->all();
@@ -54,7 +47,6 @@ class CommentController extends Controller
 
     public function commentDelete($comment_id, $item_id)
     {
-        //コメントをidで検索してレコードを削除する
         Comment::findOrFail($comment_id)->delete();
 
         return redirect()->route('commentView', ['item_id' => $item_id]);
