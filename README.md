@@ -75,33 +75,35 @@ coachtechブランドのアイテムを出品するために作成しました�
 
 ## 環境構築
 
-まず、GitHubからリポジトリをクローンします。
+###### まず、GitHubからリポジトリをクローンします。
 
 ```bash
-git clone https://github.com/srgnair/2024-04-04_shirogane__flea-market-app.git
-cd 2024-04-04_shirogane__flea-market-app
+ git clone https://github.com/srgnair/2024-04-04_shirogane__flea-market-app.git
+ cd 2024-04-04_shirogane__flea-market-app
+```
 
-依存パッケージのインストール
-次に、Composerを使用して依存パッケージをインストールします。
+###### 次に、Composerを使用して依存パッケージをインストールします。
 
-```bash
+```bash 
 composer install
+```
 
-環境設定ファイルの作成
-.env.example ファイルをコピーして .env ファイルを作成します。
+###### .env.example ファイルをコピーして .env ファイルを作成します。
 
 ```bash
 cp .env.example .env
+```
 
-アプリケーションキーを生成します。
+###### アプリケーションキーを生成します。
 
 ```bash
 php artisan key:generate
+```
 
-データベースの設定
-.env ファイルを開き、データベース接続情報を設定します。
-足りない部分を追加してください。
+###### .env ファイルを開き、データベース接続情報を設定します。
+###### 足りない部分を追加してください。
 
+```bash
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
@@ -128,20 +130,21 @@ LINE_REDIRECT_URI=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 GOOGLE_REDIRECT_URI=
+```
 
-マイグレーションの実行
-データベースのテーブルを作成するためにマイグレーションを実行します。
+###### データベースのテーブルを作成するためにマイグレーションを実行します。
 
 ```bash
 php artisan migrate
+```
 
-ローカルサーバの起動
-アプリケーションを起動します。
+###### ローカルサーバの起動・アプリケーションを起動します。
 
 ```bash
 php artisan serve
+```
 
-これで、ブラウザから http://localhost にアクセスしてアプリケーションを確認できます。
+###### これで、ブラウザから http://localhost にアクセスしてアプリケーションを確認できます。
 
 ## ほかに記載すること
 全ての機能は完成できませんでした。
