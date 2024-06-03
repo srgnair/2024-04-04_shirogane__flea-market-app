@@ -2,8 +2,8 @@
 coachtechフリマ
 
 ## 概要
-####  独自のフリマアプリ
-<img width="950" alt="スクリーンショット 2024-03-21 064201" src="https://github.com/srgnair/2024-02-04_shirogane_Rese/assets/143247574/3511038c-b0f9-473a-9d90-a775c0efdf46">
+####  フリマアプリ
+<img width="950" alt="スクリーンショット 2024-06-03 152552" src="https://github.com/srgnair/2024-04-04_shirogane__flea-market-app/assets/143247574/43516345-2494-46f0-a288-8a4f9573f530">
 
 ## サービスを作成した背景
 coachtechブランドのアイテムを出品するために作成しました。
