@@ -75,8 +75,6 @@ coachtechブランドのアイテムを出品するために作成しました�
 
 ## 環境構築
 
-## リポジトリのクローン
-
 まず、GitHubからリポジトリをクローンします。
 
 ```bash
@@ -86,14 +84,18 @@ cd 2024-04-04_shirogane__flea-market-app
 依存パッケージのインストール
 次に、Composerを使用して依存パッケージをインストールします。
 
+```bash
 composer install
 
 環境設定ファイルの作成
 .env.example ファイルをコピーして .env ファイルを作成します。
 
+```bash
 cp .env.example .env
 
 アプリケーションキーを生成します。
+
+```bash
 php artisan key:generate
 
 データベースの設定
@@ -130,15 +132,16 @@ GOOGLE_REDIRECT_URI=
 マイグレーションの実行
 データベースのテーブルを作成するためにマイグレーションを実行します。
 
+```bash
 php artisan migrate
 
 ローカルサーバの起動
 アプリケーションを起動します。
 
+```bash
 php artisan serve
 
 これで、ブラウザから http://localhost にアクセスしてアプリケーションを確認できます。
-
 
 ## ほかに記載すること
 全ての機能は完成できませんでした。
