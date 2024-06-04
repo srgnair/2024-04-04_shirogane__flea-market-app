@@ -14,9 +14,9 @@
     <div class="wrapper">
 
         <header>
-            <div class="header_logo">
-                <div class="img">
-                    <img src="img/coachtechLogo.png">
+            <div class="header__logo">
+                <div>
+                    <a href="{{ route('mainView') }}"><img src="{{ asset('img/coachtechLogo.png') }}"></a>
                 </div>
             </div>
         </header>

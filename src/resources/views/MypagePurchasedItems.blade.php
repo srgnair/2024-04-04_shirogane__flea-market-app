@@ -41,12 +41,19 @@
 </div>
 
 <div class="mypage__content">
-    <div class="mypage__content--img">
-        <div class="mypage__content--card">
-            @foreach($itemImages as $itemImage)
-            <img src="{{ asset($itemImage->image) }}" alt="イメージ画像">
-            @endforeach
+
+    <div class="mypage__content--cards">
+        @foreach($purchasedItems as $index => $purchasedItem)
+        <div @if($purchasedItem->item->transaction->transaction_type === 'listed') class="card" @else class="card__sold" @endif>
+            <a href="{{ route('detailView', ['id' => $purchasedItem->item->id]) }}" class="card__link">
+                <div class="card__image-container">
+                    <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
+                    <img class="card__item-image" src="{{ asset($itemImages[$index]->image) }}" alt="イメージ画像">
+                </div>
+            </a>
         </div>
+        @endforeach
     </div>
+
 </div>
 @endsection

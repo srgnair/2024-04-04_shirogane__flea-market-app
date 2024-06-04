@@ -15,17 +15,40 @@
     <div class="wrapper">
         <header>
             <div class="header__logo">
-                <div class="img">
+                <div>
                     <a href="{{ route('mainView') }}"><img src="{{ asset('img/coachtechLogo.png') }}"></a>
                 </div>
             </div>
+            <div class="header__search-function--wrapper">
+                <form action="{{ route('mainView') }}" method="GET">
+                    @csrf
+                    <div class="header__search-function">
+                        <input class="header__search-function--input" type="text" name="keyword" value="{{ session('search_keyword') }}" placeholder=" なにをお探しですか？">
+                    </div>
 
-            <div class="header__search-function">
-                <input class="header__search-function--input" type="text" name="keyword" placeholder=" なにをお探しですか？">
-                <input type="submit" value="検索">
+                </form>
             </div>
 
-            @if(Auth::check())
+            @if(Auth::check() && Auth::user()->role === 'admin')
+            <ul class="header__ul">
+                <form action="/logout" method="post">
+                    @csrf
+                    <li>
+                        <button class="header__ul--button">
+                            ログアウト
+                        </button>
+                    </li>
+                </form>
+                <li>
+                    <a href="{{ route('adminView') }}">
+                        <button class="header__ul--button">
+                            管理者
+                        </button>
+                    </a>
+                </li>
+            </ul>
+
+            @elseif(Auth::check())
             <ul class="header__ul">
                 <form action="/logout" method="post">
                     @csrf
@@ -47,7 +70,7 @@
             @else
             <ul class="header__ul">
                 <li>
-                    <a href="{{ route('registerView') }}">
+                    <a href="{{ route('loginView') }}">
                         <button>
                             ログイン
                         </button>

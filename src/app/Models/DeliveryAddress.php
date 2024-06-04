@@ -16,6 +16,7 @@ class DeliveryAddress extends Model
     }
 
     protected $fillable = [
+        'user_id',
         'post_code',
         'address',
         'building_name',

@@ -7,9 +7,6 @@
 @endsection
 @section('content')
 <div class="list-item__container">
-    @if (count($errors) > 0)
-    <p>内容を確認してください</p>
-    @endif
     <div class="form__submit">
         {{ session('message') }}
     </div>
@@ -22,18 +19,18 @@
             商品の出品
         </div>
         <div class="list-item__form">
-
             <div class="form__item">
-                <label for="image">商品画像</label>
                 @error('image')
                 <p>{{$errors->first('image')}}</p>
                 @enderror
                 <div class="form__item--border">
                     <div class="form__image--select-button">
-                        <input class="form__item--control" type="file" name="image">
-                        <button>画像を選択する</button>
+                        <input type="file" class="fileElem" onchange="onChangeFileInput(this)" id="fileElem" multiple accept="image/*" style="display:none" name="image" />
+                        <button id="fileSelect" type="button">画像を選択する</button>
+                        <div id="fileList"></div>
                     </div>
                 </div>
+                <script src="{{ asset('js/sendImg.js') }}"></script>
             </div>
             <div class="list-item__form">
                 <div class="form__title">商品の詳細</div>
@@ -42,15 +39,34 @@
                     @error('category')
                     <p>{{$errors->first('category')}}</p>
                     @enderror
-                    <input type="text" name="category" value="{{ old('category') }}" />
+                    <select id="selectCategory" name="category" class="form__item--control">
+                        <option value="">選択してください</option>
+                        <option value="1">ファッション</option>
+                        <option value="2">ベビー・キッズ</option>
+                        <option value="3">ゲーム・おもちゃ・グッズ</option>
+                        <option value="4">メンズ</option>
+                        <option value="5">レディース</option>
+                    </select>
                 </div>
                 <div class="form__item">
                     <label for="condition">商品の状態</label>
                     @error('condition')
                     <p>{{$errors->first('condition')}}</p>
                     @enderror
-                    <input type="text" name="condition" value="{{ old('condition') }}" />
-
+                    <select id="selectCondition" name="condition" class="form__item--control">
+                        <option value="">選択してください</option>
+                        <option value="1">新品、未使用</option>
+                        <option value="2">未使用に近い</option>
+                        <option value="3">目立った傷や汚れなし</option>
+                        <option value="4">やや傷や汚れあり</option>
+                        <option value="5">傷や汚れあり</option>
+                    </select>
+                </div>
+                <div class="form__item">
+                    <label for="condition">ブランド名</label>
+                    @error('brand_name')
+                    <p>{{$errors->first('brand_name')}}</p>
+                    @enderror
                     <input type="text" name="brand_name" value="{{ old('brand_name') }}" />
                 </div>
             </div>

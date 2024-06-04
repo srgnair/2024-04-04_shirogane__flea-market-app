@@ -14,6 +14,8 @@ return [
     |
     */
 
+    'name' => env('APP_NAME', 'Laravel'),
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
@@ -29,6 +31,27 @@ return [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
+    ],
+
+    'stripe' => [
+        'public' => [
+            'key' => env('STRIPE_PUBLIC_KEY'),
+        ],
+        'secret' => [
+            'key' => env('STRIPE_SECRET_KEY'),
+        ],
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI')
+    ],
+
+    'line' => [
+        'client_id' => env('LINE_CLIENT_ID'),
+        'client_secret' => env('LINE_CLIENT_SECRET'),
+        'redirect' => env('LINE_REDIRECT_URI')
     ],
 
 ];

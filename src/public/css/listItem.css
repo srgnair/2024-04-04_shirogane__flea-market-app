@@ -9,21 +9,17 @@ font-weight: bolder;
 margin-bottom: 20px;
 }
 
-/* .list-item__form {
-margin-bottom: 20px;
-} */
-
 .list-item__form--img {
 display: flex;
 margin-bottom: 40px;
 }
 
-.form__img--select-button {
+.form__image--select-button {
 margin-left: 40px;
 }
 
-.form__img--select-button button {
-border: 3px solid #ff5555;
+.form__image--select-button button {
+border: 2px solid #ff5555;
 outline: none;
 margin: 0 auto;
 padding: 3px 20px 3px;
@@ -39,7 +35,7 @@ cursor: pointer;
 
 .form__title {
 text-align: left;
-border-bottom: #5F5F5F 3px solid;
+border-bottom: #5F5F5F 1px solid;
 margin: 50px 0 20px;
 font-weight: bold;
 color: black;
@@ -51,7 +47,7 @@ margin-bottom: 20px;
 }
 
 .form__item--border {
-border: #5F5F5F solid 3px;
+border: #5F5F5F dashed 1px;
 padding: 50px;
 }
 
@@ -66,7 +62,7 @@ font-weight: bold;
 width: 100%;
 font-size: 18px;
 padding: 10px;
-border: #5F5F5F solid 3px;
+border: #5F5F5F solid 1px;
 }
 
 .form__submit {
@@ -79,7 +75,7 @@ border: none;
 outline: none;
 margin-top: 40px;
 padding: 10px;
-background: #D49D9D;
+background: #ff5555;
 display: inline-block;
 color: #fff;
 font-size: 18px;

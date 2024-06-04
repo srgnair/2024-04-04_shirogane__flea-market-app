@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -26,11 +24,6 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
     }
 
     public function items()
@@ -58,6 +51,16 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function givenReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewer_id');
+    }
+
+    public function receivedReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewee_id');
+    }
+
     protected $fillable = [
         'email',
         'password',
@@ -65,6 +68,9 @@ class User extends Authenticatable
         'post_code',
         'address',
         'building_name',
+        'img',
+        'role',
+        'line_id',
     ];
 
     /**
@@ -75,6 +81,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'line_id'
     ];
 
     /**

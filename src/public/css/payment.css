@@ -1,0 +1,37 @@
+.payment {
+    width: 800px;
+    margin: 100px auto;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    background-color: #6E85B7;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        width: 500px;
+    }
+
+    .payment {
+        width: 100%;
+        margin: 80px auto;
+    }
+}
+
+.payment__title {
+    font-weight: bold;
+    color: #fff;
+    padding: 10px 10px 10px 20px;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.payment__content {
+    background: #fff;
+    padding: 30px 100px;
+    border-radius: 0 0 3px 3px;
+    text-align: left;
+}
+
+.payment__content div {
+    margin: 10px;
+}

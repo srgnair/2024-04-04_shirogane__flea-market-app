@@ -1,3 +1,7 @@
+main{
+  padding-top: 40px;
+}
+
 .profile-change {
 width: 500px;
 margin: 0 auto;
@@ -11,17 +15,29 @@ margin-bottom: 20px;
 
 .profile-change__form--img {
 display: flex;
-margin-bottom: 40px;
+padding-bottom: 40px;
+margin: auto 0;
+}
+
+.form__img--img{
+    margin: auto 0;
+}
+
+.profile-change__form--img img {
+width: 100px;
+height: 100px;
+margin: auto 0;
+border-radius: 50%;
 }
 
 .form__img--select-button {
-margin-left: 40px;
+padding-left: 40px;
+margin: auto 0px;
 }
 
 .form__img--select-button button {
 border: 3px solid #ff5555;
 outline: none;
-margin-top: 40px;
 padding: 3px 20px 3px;
 background: white;
 display: inline-block;
@@ -74,4 +90,33 @@ color: #0073cc;
 margin-top: 20px;
 cursor: pointer;
 font-weight: bold;
+}
+
+.form__item--control::file-selector-button {
+  width: 100px;
+  height: 40px;
+  opacity: 0;
+  position: relative;
+}
+
+.form__item--control::before{ 
+  position: absolute;
+  content: "画像を選択する";
+  width: 100px;
+  height: 40px;
+  font-weight: bold;
+  color: white;
+  background: red;
+  font-size: 14px;
+  border-radius: 10em;
+  text-align: center;
+  align-items: center;
+  display: grid;
+  cursor: pointer;
+}
+
+.form__item--control{ 
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
