@@ -87,6 +87,8 @@ Route::middleware(['web', 'auth', 'verified'])->group(
         Route::get('/review/{id}', [ReviewController::class, 'reviewView'])->name('reviewView');
         Route::post('/review_buyer/{id}', [ReviewController::class, 'postReviewBuyer'])->name('postReviewBuyer');
         Route::post('/review_selleryer/{id}', [ReviewController::class, 'postReviewSeller'])->name('postReviewSeller');
+        Route::get('/reviews/{seller_id}', [ReviewController::class, 'showReviews'])->name('showReviews');
+
 
         Route::post('/{item_id}', [LikeController::class, 'like'])->name('like');
         Route::delete('/{item_id}', [LikeController::class, 'deleteLike'])->name('deleteLike');

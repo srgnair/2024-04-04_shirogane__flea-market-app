@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 
-<div class="admin">
+<div class="confirm-amount">
     <table>
         <tbody>
             <tr>

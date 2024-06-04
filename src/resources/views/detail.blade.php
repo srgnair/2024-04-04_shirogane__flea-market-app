@@ -10,7 +10,7 @@
 @endsection
 @section('content')
 
-@if($item->transaction && $item->transaction->payment_method === 'customer_balance' && $item->transaction->transaction_type === 'waiting_payment' && $item->transaction->buyer_id === Auth::user()->id )
+@if(Auth::check() && $item->transaction && $item->transaction->payment_method === 'customer_balance' && $item->transaction->transaction_type === 'waiting_payment' && $item->transaction->buyer_id === Auth::user()->id )
 <div>
     購入を受け付けました。以下の口座に入金してください。
     <br>
@@ -18,7 +18,7 @@
     <br>
     <button>入金完了</button>
 </div>
-@elseif(Auth::user()->id == $item->seller_id && $item->transaction->transaction_type == 'waiting_shipping')
+@elseif(Auth::check() && Auth::user()->id == $item->seller_id && $item->transaction->transaction_type == 'waiting_shipping')
 <div class="message__update-status">
     商品が購入されました。発送しましたら以下のボタンを押してください。
     <form class="form__wrapper" action="{{ route('StatusCurrently', ['id' => $item->id] ) }}" method="POST">
@@ -26,7 +26,7 @@
         <button type="submit">発送しました</button>
     </form>
 </div>
-@elseif(Auth::id() == $item->buyer_id && $item->transaction->transaction_type == 'waiting_arrival')
+@elseif(Auth::check() && Auth::id() == $item->buyer_id && $item->transaction->transaction_type == 'waiting_arrival')
 <div>
     商品が発送されました。商品を受け取りましたら以下のボタンを押してください。
     <form class="form__wrapper" action="{{ route('StatusComplete', ['id' => $item->id] ) }}" method="POST">
@@ -84,7 +84,7 @@
                             @method('DELETE')
                             <input type="hidden" name="item_id" value="{{$item->id}}">
                             <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
-                            <button type="button" class="like-button">
+                            <button type="submit" class="like-button">
                                 <i class="fa fa-star fa-xl" style="color: #ff5555;"></i>
                             </button>
                             <div class="detail__item-info--number">{{ $likes->count() }}</div>
@@ -115,7 +115,13 @@
                 </div>
             </div>
             <div class="detail__item-info--button-to-buy">
-                @if($item->transaction->transaction_type === 'listed')
+                @if(!Auth::check())
+                <a href="{{ Auth::check() ? route('confirmPurchaseView', ['item_id' => $item->id]) : '#' }}" title="{{ Auth::check() ? '' : '購入するにはログインが必要です' }}">
+                    <button {{ Auth::check() ? '' : 'disabled' }}>
+                        購入するにはログインが必要です。
+                    </button>
+                </a>
+                @elseif($item->transaction->transaction_type === 'listed')
                 <a href="{{ route('confirmPurchaseView', ['item_id' => $item->id]) }}">
                     <button>
                         購入する
@@ -166,8 +172,24 @@
 
 </div>
 
+<div>
+    <div>
+        出品者情報
+    </div>
+    <div>
+        <img src=" {{ asset($seller_information->img)}}" alt="イメージ画像">
+    </div>
+    <div>
+        {{ $seller_information->user_name }}
+    </div>
+    <div>
+        <a href="{{ route('showReviews', ['seller_id' => $seller_information->id]) }}">
+            レビュー一覧ページ
+        </a>
+    </div>
+</div>
+
 <script>
-    // Bladeテンプレート内でルート名をJavaScriptに渡す
     const routes = {
         like: <?php echo json_encode(route('like', ['item_id' => 'ITEM_ID_PLACEHOLDER'])); ?>,
         deleteLike: <?php echo json_encode(route('deleteLike', ['item_id' => 'ITEM_ID_PLACEHOLDER'])); ?>

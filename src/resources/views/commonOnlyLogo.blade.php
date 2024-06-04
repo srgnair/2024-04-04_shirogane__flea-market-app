@@ -15,7 +15,7 @@
 
         <header>
             <div class="header__logo">
-                <div class="img">
+                <div>
                     <a href="{{ route('mainView') }}"><img src="{{ asset('img/coachtechLogo.png') }}"></a>
                 </div>
             </div>

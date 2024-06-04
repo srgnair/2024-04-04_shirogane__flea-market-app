@@ -12,7 +12,7 @@
         <form action="{{ route('mainSearchRefineView') }}" method="GET">
             @csrf
 
-            <div class="search_button">
+            <div class="search__button">
                 <label for="listedOrSoldout">販売状況</label>
                 <select name="listedOrSoldout">
                     <option value="">全て</option>
@@ -21,7 +21,7 @@
                 </select>
             </div>
 
-            <div class="search_button">
+            <div class="search__button">
                 <label for="orderBy">表示順</label>
                 <select name="orderBy">
                     <option value="newest" {{ session('selected_orderBy') === 'newest' ? 'selected' : '' }}>新しい順</option>
@@ -31,7 +31,7 @@
                 </select>
             </div>
 
-            <div class="search_button">
+            <div class="search__button">
                 <label for="category">カテゴリー</label>
                 <select name="category">
                     <option value="">全て</option>
@@ -43,7 +43,7 @@
                 </select>
             </div>
 
-            <div class="search_button">
+            <div class="search__button">
                 <label for="condition">コンディション</label>
                 <select name="condition">
                     <option value="">全て</option>
@@ -56,7 +56,7 @@
 
             </div>
 
-            <div class="search_button">
+            <div class="search__button">
                 <input type="number" name="minPrice" value="{{ session('search_query.minPrice') }}" placeholder="最低価格">
                 ～
                 <input type="number" name="maxPrice" value="{{ session('search_query.maxPrice') }}" placeholder="最高価格">

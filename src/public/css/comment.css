@@ -21,13 +21,13 @@ display: flex;
     width: 100%;
 }
 
-.comment__item-info {
+.comment__item-info--wrapper {
 margin: 0 auto;
 text-align: left;
-width: 50%;
+width: 100%;
 }
 
-.comment__item-info--item {
+.comment__item-info {
 margin-bottom: 30px;
 }
 
@@ -101,12 +101,12 @@ font-size: small;
 margin-bottom: 100px;
 }
 
-.comment__item-info--talk-history-wrapper {
+.comment__item-info--talk-history {
 margin: 50px 0;
 }
 
 .comment__item-info--input textarea {
-width: 100%;
+width: 80%;
 resize: none;
 padding: 10px;
 font-size: 20px;

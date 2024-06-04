@@ -21,23 +21,23 @@
 </div>
 @endif
 
-<form id="card-form" class="form__wrapper" action="{{ route('purchase', ['item_id' => $item->id] ) }}" method="POST">
+<form id="card-form" action="{{ route('purchase', ['item_id' => $item->id] ) }}" method="POST">
     @csrf
-    <div class="confirm-purchase__container">
+    <div class="container">
 
         <div class="container__left">
 
-            <div class="container__img--wrapper">
-                <div class="comment__img">
+            <div class="container__left--img-wrapper">
+                <div class="container__left--img">
                     @foreach($itemImages as $itemImage)
                     <div class="card__image-container">
-                        <img class="card__background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
-                        <img class="card__item-image" src="{{ asset($itemImage->image) }}" alt="イメージ画像">
+                        <img class="card__image--background-image" src="{{ asset('img/grayBack.png') }}" alt="グレーの背景">
+                        <img class="card__image--item-image" src="{{ asset($itemImage->image) }}" alt="イメージ画像">
                     </div>
                     @endforeach
                 </div>
 
-                <div class="container__item-name--wrapper">
+                <div class="container__left--item-name-wrapper">
                     <div class="container__item-name">
                         {{ $item->item_name }}
                     </div>
@@ -53,7 +53,7 @@
                         支払い方法
                     </div>
 
-                    <div class="paymentMethod">
+                    <div class="payment-method">
                         @if($item->transaction->payment_method === 'card')
                         <div id="foodList">
                             <label>
@@ -122,7 +122,7 @@
         </div>
         <div class="container__right">
 
-            <div class="confirm-purchase__payment-info--table">
+            <div class="container__right--table">
                 <table>
                     <tbody>
                         <tr>
@@ -146,7 +146,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="confirm-purchase__payment-info--button">
+            <div class="container__right--button">
 
                 @if($transaction->transaction_type == 'listed')
                 <button type="submit">購入する</button>
@@ -158,7 +158,7 @@
                     {{ session('status') }}
                 </div>
                 @endif
-                <!-- <p>{{ config('services.stripe.secret.key') }}</p> -->
+
             </div>
         </div>
 

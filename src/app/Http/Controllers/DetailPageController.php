@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\NotificationShipping;
 use App\Mail\NotificationShippingComplete;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DetailPageController extends Controller
 {
@@ -23,9 +24,13 @@ class DetailPageController extends Controller
         $likes = Like::where('item_id', $item_id)->get();
         $comments = Comment::where('item_id', $item_id)->get();
 
-        $transaction = Transaction::find($item_id);
+        $transaction = Transaction::where('item_id', $item_id)->first();
 
-        return view('detail', compact('item', 'itemCategories', 'itemImages', 'likes', 'comments', 'transaction'));
+        if ($transaction) {
+            $seller_information = User::where('id', $transaction->seller_id)->first();
+        }
+
+        return view('detail', compact('item', 'itemCategories', 'itemImages', 'likes', 'comments', 'transaction', 'seller_information'));
     }
 
     public function updateShippingStatusCurrently(Request $request, $id)

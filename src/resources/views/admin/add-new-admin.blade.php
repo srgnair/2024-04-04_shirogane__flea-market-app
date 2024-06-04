@@ -6,17 +6,17 @@
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 @endsection
 @section('content')
-<div class="adminContents">
+<div class="add-new-admin__wrapper">
     @if(session('message'))
     <div class="alert alert-success">
         {{ session('message') }}
     </div>
     @endif
-    <div class="adminContents">
-        <div class="adminContents__title">
+    <div class="add-new-admin">
+        <div class="add-new-admin__title">
             管理者の作成
         </div>
-        <div class="adminContents__content">
+        <div class="add-new-admin__content">
             @error('admin')
             <p>{{$errors->first('admin')}}</p>
             @enderror
@@ -31,7 +31,7 @@
             @enderror
             <form class="form__wrapper" action="{{ route('addNewAdmin') }}" method="POST">
                 @csrf
-                <div class="form">
+                <div class="add-new-admin__content--form">
 
                     <div class="form__item">
                         <input class="form__item--control" type="text" name="user_name" value="{{ old('user_name') }}" placeholder="お名前" />

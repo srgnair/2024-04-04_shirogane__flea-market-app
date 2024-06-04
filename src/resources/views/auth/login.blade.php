@@ -39,21 +39,21 @@
                     <button type="submit">ログインする</button>
                 </div>
 
-                <div class="before-google">
+                <div class="form__before-google">
                     または
                 </div>
 
-                <div class="google">
+                <div class="form__google">
                     <a href="{{ route('login.google') }}">
                         <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
                     </a>
                 </div>
 
-                <div class="line">
+                <!-- <div class="form__line">
                     <a href="{{ route('login.line') }}">
                         <img src="{{ asset('img/btn_login_base.png') }}">
                     </a>
-                </div>
+                </div> -->
 
                 <div class="form__switch">
                     <a href="{{ route('registerView') }}">

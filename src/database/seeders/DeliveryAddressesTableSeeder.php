@@ -20,7 +20,7 @@ class DeliveryAddressesTableSeeder extends Seeder
                 'user_id' => 1,
                 'post_code' => '0123456',
                 'address' => '神奈川県横浜市',
-                'building_name' => 'ユーザーマンション4-5-6',
+                'building_name' => 'ユーザーマンション1-2-3',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

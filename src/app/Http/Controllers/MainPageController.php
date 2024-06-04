@@ -31,7 +31,10 @@ class MainPageController extends Controller
         }
 
         $items = Item::all();
-        $itemImages = ItemImage::whereIn('item_id', $items->pluck('item_id'))->get();
+        $itemImages = ItemImage::whereIn(
+            'item_id',
+            $items->pluck('item_id')
+        )->get()->keyBy('item_id');
 
         return view('main', compact('items', 'itemImages'));
     }

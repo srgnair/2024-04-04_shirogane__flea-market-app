@@ -9,6 +9,7 @@ use App\Http\Requests\ReviewRequest;
 use App\Mail\ReviewFromBuyerCompleted;
 use App\Mail\ReviewFromSellerCompleted;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class ReviewController extends Controller
 {
@@ -48,8 +49,7 @@ class ReviewController extends Controller
 
         if ($user_id == $transaction->buyer_id) {
             $reviewee_id = $transaction->seller_id;
-        }
-        else {
+        } else {
             return redirect()->back()->with('error', 'この取引のレビューを投稿する権限がありません');
         }
 
@@ -85,8 +85,7 @@ class ReviewController extends Controller
 
         if ($user_id == $transaction->seller_id) {
             $reviewee_id = $transaction->buyer_id;
-        }
-        else {
+        } else {
             return redirect()->back()->with('error', 'この取引のレビューを投稿する権限がありません');
         }
 
@@ -108,5 +107,13 @@ class ReviewController extends Controller
         Mail::to($recipientEmail)->send($reviewFromSellerCompletedEmail);
 
         return redirect()->route('detailView', ['id' => $id])->with('message', '登録されました！');
+    }
+
+    public function showReviews($seller_id)
+    {
+        $seller_information = User::find($seller_id);
+        $reviews = Review::where('reviewee_id', $seller_id)->get();
+
+        return view('showReview', compact('seller_information', 'reviews'));
     }
 }

@@ -6,23 +6,23 @@
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 @endsection
 @section('content')
-<div class="admin">
+<div class="admin-item-list">
 
-    <div class="admin__search-form">
+    <div class="admin-item-list__search-form">
         <form action="{{ route('itemListView') }}" method="GET">
             @csrf
 
-            <div class="search_button">
+            <div class="search-button">
                 <label for="sellerId">販売者id</label>
                 <input type="number" name="sellerId">
             </div>
 
-            <button type="submit">検索</button>
+            <button type="submit-button">検索</button>
             <a href="{{ route('itemListView', ['reset' => true]) }}">検索条件をリセット</a>
         </form>
     </div>
 
-    <div class="admin_data-table">
+    <div class="admin-item-list__data-table">
         <table>
             <tbody>
                 @if($results->isEmpty())

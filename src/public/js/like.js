@@ -29,23 +29,21 @@ $(document).ready(function() {
                 console.log('Response:', response);
                 if (response.success) {
                     var icon = button.find('i');
-                    var count = form.find('.detail__item-info--number');
+                    var count = form.closest('.comment__item-info--star').find('.comment__item-info--number');
+                    
                     if (response.liked) {
                         icon.css('color', '#ff5555');
                         icon.removeClass('fa-star-o').addClass('fa-star');
-                    } else {
-                        icon.css('color', 'black');
-                        icon.removeClass('fa-star').addClass('fa-star-o');
-                    }
-                    count.text(response.likes_count);
-
-                    if (response.liked) {
                         form.attr('action', routes.deleteLike.replace('ITEM_ID_PLACEHOLDER', item_id));
                         form.find('input[name="_method"]').val('DELETE');
                     } else {
+                        icon.css('color', '');
+                        icon.removeClass('fa-star').addClass('fa-star-o');
                         form.attr('action', routes.like.replace('ITEM_ID_PLACEHOLDER', item_id));
                         form.find('input[name="_method"]').val('POST');
                     }
+
+                    count.text(response.likes_count);
 
                 } else {
                     console.error('いいね！の処理に失敗しました。');

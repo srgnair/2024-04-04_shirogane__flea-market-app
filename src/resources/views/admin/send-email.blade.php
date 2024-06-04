@@ -6,12 +6,12 @@
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 @endsection
 @section('content')
-<div class="admin">
-    <div class="adminShopContents">
-        <div class="adminShopContents__title">
+<div class="send-email__wrapper">
+    <div class="send-email">
+        <div class="send-email__title">
             メール送信
         </div>
-        <div class="adminShopContents__content">
+        <div class="send-email__content">
             @error('recipient')
             <p>{{$errors->first('recipient')}}</p>
             @enderror
@@ -21,7 +21,7 @@
             @error('body')
             <p>{{$errors->first('body')}}</p>
             @enderror
-            <form class="form__wrapper" action="{{ route('sendEmail') }}" method="POST">
+            <form class="send-email__form--wrapper" action="{{ route('sendEmail') }}" method="POST">
                 @csrf
                 <div class="form">
 
