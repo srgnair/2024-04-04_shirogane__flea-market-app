@@ -16,7 +16,6 @@ use App\Http\Controllers\ShippingChangeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\GoogleLoginController;
-use App\Http\Controllers\LineLoginController;
 
 require __DIR__ . '/auth.php';
 
@@ -41,9 +40,6 @@ Route::middleware('web')->group(
             function () {
                 Route::get('/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
                 Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
-
-                Route::get('/line', [LineLoginController::class, 'redirectToLine'])->name('login.line');
-                Route::get('/line/callback', [LineLoginController::class, 'handleLineCallback'])->name('login.line.callback');
             }
         );
     }
