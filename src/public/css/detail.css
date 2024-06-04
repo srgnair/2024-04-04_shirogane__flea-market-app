@@ -33,8 +33,9 @@ width: 50%;
 margin-bottom: 30px;
 }
 
-.detail__item-info--title {
+.detail__item-info--title h2 {
 margin-bottom: 10px;
+font-size: 20px;
 }
 
 .detail__item-info--title {
@@ -42,7 +43,7 @@ font-weight: bold;
 font-size: larger;
 }
 
-.detail__item-info--brand-name {
+.detail__item-info--brand-name p {
 font-size: smaller;
 margin-bottom: 10px;
 }

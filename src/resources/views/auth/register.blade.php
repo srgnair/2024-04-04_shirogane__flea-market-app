@@ -9,7 +9,7 @@
 
 <div class="register-form">
     <div class="register-form__title">
-        会員登録
+        <h1>会員登録</h1>
     </div>
     <div class="register-form__content">
         @error('email')

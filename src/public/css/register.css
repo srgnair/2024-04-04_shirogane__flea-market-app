@@ -7,7 +7,7 @@ width: 500px;
 margin: 0 auto;
 }
 
-.register-form__title {
+.register-form__title h1 {
 font-size: 24px;
 font-weight: bolder;
 margin-bottom: 20px;

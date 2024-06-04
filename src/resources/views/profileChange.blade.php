@@ -11,7 +11,7 @@
     <form class="form__wrapper" action="{{ route('profileChange') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="profile-change__title">
-            プロフィール設定
+            <h1>プロフィール設定</h1>
         </div>
         @error('img')
         <p>{{$errors->first('img')}}</p>

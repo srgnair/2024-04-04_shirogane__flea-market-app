@@ -66,13 +66,13 @@
         <div class="detail__item-info--item">
 
             <div class="detail__item-info--title">
-                {{ $item->item_name }}
+                <h2>{{ $item->item_name }}</h2>
             </div>
             <div class="detail__item-info--brand-name">
-                {{ $item->brand_name }}
+                <p>{{ $item->brand_name }}</p>
             </div>
             <div class="detail__item-info--price">
-                ￥{{ number_format($item->price, 0, '.', ',') }}
+                <p>￥{{ number_format($item->price, 0, '.', ',') }}</p>
             </div>
 
             <div class="detail__item-info--icon-wrapper">
@@ -138,16 +138,16 @@
 
         <div class="detail__item-info--item">
             <div class="detail__item-info--title">
-                商品説明
+                <h2>商品説明</h2>
             </div>
             <div class="detail__item-info--comment">
-                {{ $item->description }}
+                <p>{{ $item->description }}</p>
             </div>
         </div>
 
         <div class="detail__item-info--item">
             <div class="detail__item-info--title">
-                商品の情報
+                <h2>商品の情報</h2>
             </div>
             <div class="detail__item-info--item-wrapper">
                 <div class="category__title">
